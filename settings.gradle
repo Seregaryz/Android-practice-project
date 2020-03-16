@@ -1,2 +1,6 @@
 rootProject.name='Android practice project'
 include ':app'
+include ':feature-profile'
+include ':core-db'
+include ':core-di'
+include ':feature-model-entity'
