@@ -2,14 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
 
 
     defaultConfig {
-        applicationId "com.kfu.itis.androidpracticeproject"
+        applicationId "com.kfu.itis.feature_model_entity"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
@@ -23,9 +22,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-    androidExtensions {
-        experimental = true
     }
 
 }
@@ -58,4 +54,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:17.2.3'
     implementation 'com.google.firebase:firebase-auth:19.3.0'
 
+    def architectureComponentVersion = '2.0.0'
+    implementation "androidx.lifecycle:lifecycle-extensions:$architectureComponentVersion"
+    //noinspection LifecycleAnnotationProcessorWithJava8
+    kapt "androidx.lifecycle:lifecycle-compiler:$architectureComponentVersion"
 }
