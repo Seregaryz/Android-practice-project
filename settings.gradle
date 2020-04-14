@@ -1,4 +1,6 @@
 rootProject.name='Android practice project'
 include ':app'
-include ':view-model'
-include ':model'
+include ':presentation'
+include ':domain'
+include ':core-db'
+include ':data'
