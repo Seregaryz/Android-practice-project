@@ -1,8 +1,8 @@
-package com.kfu.itis.androidpracticeproject.presentation.activities
+package com.kfu.itis.view.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.kfu.itis.androidpracticeproject.R
+import com.kfu.itis.view_model.R
 
 class MainActivity : AppCompatActivity() {
 

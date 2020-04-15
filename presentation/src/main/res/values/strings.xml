@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">presentation</string>
+    <string name="nav_list">List</string>
+    <string name="nav_market">Shop</string>
+    <string name="nav_add">Add</string>
+    <string name="nav_liked">Liked</string>
+    <string name="nav_profile">Profile</string>
 </resources>

@@ -46,6 +46,12 @@ buildscript {
 
         okhttpDep = "com.squareup.okhttp3:okhttp:$okhttpVersion"
         loggingInterceptorDep = "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+
+
+        androidDep = "androidx.appcompat:appcompat:$supportVersion"
+        recyclerViewDep = "androidx.recyclerview:recyclerview:$supportVersion"
+        materialDep = "com.google.android.material:material:$supportVersion"
+
     }
     repositories {
         google()
