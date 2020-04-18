@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext{
+    ext {
         kotlin_version = '1.3.61'
 
         versionName = '1.0.0'
@@ -11,11 +11,11 @@ buildscript {
         compileSdkVersion = 28
         minSdkVersion = 21
         targetSdkVersion = 28
-        
+
         supportVersion = '1.0.0'
         constraintVersion = '1.1.3'
 
-        //navVersion = '2.3.0-alpha05'
+        def nav_version = "2.3.0-alpha05"
 
         rxJavaVersion = '2.2.7'
         rxAndroidVersion = '2.1.0'
@@ -29,9 +29,13 @@ buildscript {
         okhttpVersion = '3.8.0'
         gsonVersion = '2.8.2'
 
-        //Navigation
-//        navFragmentDep "androidx.navigation:navigation-fragment-ktx:$navVersion"
-//        navUiDep "androidx.navigation:navigation-ui-ktx:$navVersion"
+        firebaseAuthVersion = '19.3.0'
+        firebaseCoreVersion = '17.2.0'
+        firebaseFirestoneVersion = '21.1.1'
+//
+//        //Navigation
+//        navFragmentDep "androidx.navigation:navigation-fragment-ktx:$nav_version"
+//        navUiDep "androidx.navigation:navigation-ui-ktx:$nav_version"
 
         //Retrofit
         retrofitDep = "com.squareup.retrofit2:retrofit:$retrofitVersion"
@@ -47,6 +51,7 @@ buildscript {
         daggerDep = "com.google.dagger:dagger:$daggerVersion"
         daggerKapt = "com.google.dagger:dagger-compiler:$daggerVersion"
 
+        //Lifecycle
         lifecycleDep = "androidx.lifecycle:lifecycle-extensions:$architectureComponentVersion"
         lifecycleKapt = "androidx.lifecycle:lifecycle-compiler:$architectureComponentVersion"
 
@@ -54,19 +59,26 @@ buildscript {
         roomDep = "androidx.room:room-runtime:$architectureComponentVersion"
         roomKapt = "androidx.room:room-compiler:$architectureComponentVersion"
 
+        //Okhttp
         okhttpDep = "com.squareup.okhttp3:okhttp:$okhttpVersion"
         loggingInterceptorDep = "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
-
 
         androidDep = "androidx.appcompat:appcompat:$supportVersion"
         recyclerViewDep = "androidx.recyclerview:recyclerview:$supportVersion"
         materialDep = "com.google.android.material:material:$supportVersion"
 
+        //Firebase
+        firebaseAuthDep = "com.google.firebase:firebase-auth:$firebaseAuthVersion"
+        firebaseCoreDep = "com.google.firebase:firebase-core:$firebaseCoreVersion"
+        firebaseFirestoneDep = "com.google.firebase:firebase-firestore:$firebaseFirestoneVersion"
+
+        googlePlayServicesDep = "com.google.android.gms:play-services-auth:17.0.0"
+
     }
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
         classpath 'com.google.gms:google-services:4.3.3'
@@ -87,7 +99,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+
     }
 }
 
