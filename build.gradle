@@ -99,7 +99,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-
     }
 }
 

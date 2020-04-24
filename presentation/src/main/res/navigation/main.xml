@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/disputes"
-        android:name="com.kfu.itis.view.fragments.DisputesFragment"
+        android:name="com.kfu.itis.androidpracticeproject.view.fragments.DisputesFragment"
         android:label="disputes"
         tools:layout="@layout/fragment_disputes" />
     <fragment
         android:id="@+id/shop"
-        android:name="com.kfu.itis.view.fragments.ShopFragment"
+        android:name="com.kfu.itis.androidpracticeproject.view.fragments.ShopFragment"
         android:label="shop"
         tools:layout="@layout/fragment_shop" />
     <fragment
         android:id="@+id/createDispute"
-        android:name="com.kfu.itis.view.fragments.CreateDisputeFragment"
+        android:name="com.kfu.itis.androidpracticeproject.view.fragments.CreateDisputeFragment"
         android:label="create_dispute"
         tools:layout="@layout/fragment_create_dispute" />
     <fragment
         android:id="@+id/featuredDisputes"
-        android:name="com.kfu.itis.view.fragments.FeaturedDisputesFragment"
+        android:name="com.kfu.itis.androidpracticeproject.view.fragments.FeaturedDisputesFragment"
         android:label="featured_disputes"
         tools:layout="@layout/fragment_featured_disputes" />
     <fragment
         android:id="@+id/profile"
-        android:name="com.kfu.itis.view.fragments.ProfileFragment"
+        android:name="com.kfu.itis.androidpracticeproject.view.fragments.ProfileFragment"
         android:label="profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

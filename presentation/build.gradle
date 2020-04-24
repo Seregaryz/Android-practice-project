@@ -10,7 +10,6 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -56,8 +55,9 @@ dependencies {
     implementation firebaseFirestoneDep
     implementation googlePlayServicesDep
 
-
-
+    implementation daggerDep
+    implementation daggerKapt
+    
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
 }
