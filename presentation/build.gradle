@@ -55,8 +55,6 @@ dependencies {
     implementation firebaseFirestoneDep
     implementation googlePlayServicesDep
 
-    implementation daggerDep
-    implementation daggerKapt
     
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 

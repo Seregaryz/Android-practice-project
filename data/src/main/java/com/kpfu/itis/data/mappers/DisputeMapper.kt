@@ -1,8 +1,8 @@
-package com.kfu.itis.domain.model.mappers
+package com.kpfu.itis.data.mappers
 
 import com.kfu.itis.domain.model.dispute.Dispute
 import com.kfu.itis.domain.model.dispute.DisputeType
-import com.kpfu.itis.data.model.DisputeLocal
+import com.kpfu.itis.core_db.model.DisputeLocal
 
 class DisputeMapper {
 

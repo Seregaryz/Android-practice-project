@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.kfu.itis.androidpracticeproject.presentation.list.DisputeItemHolder.Companion.KEY_CREATOR
-import com.kfu.itis.androidpracticeproject.presentation.list.DisputeItemHolder.Companion.KEY_TITLE
+import com.kfu.itis.androidpracticeproject.view.list.DisputeItemHolder.Companion.KEY_CREATOR
+import com.kfu.itis.androidpracticeproject.view.list.DisputeItemHolder.Companion.KEY_TITLE
 import com.kfu.itis.domain.model.dispute.Dispute
 
 class DisputeAdapter(
@@ -24,8 +24,8 @@ class DisputeAdapter(
         if (oldItem.title !== newItem.title) {
             diffBundle.putString(KEY_TITLE, newItem.title)
         }
-        if (oldItem.creator.username != newItem.creator.username) {
-            diffBundle.putString(KEY_CREATOR, newItem.creator.username)
+        if (oldItem.creator != newItem.creator) {
+            diffBundle.putInt(KEY_CREATOR, newItem.creator)
         }
         return if (diffBundle.isEmpty) null else diffBundle
     }

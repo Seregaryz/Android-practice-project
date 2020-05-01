@@ -5,5 +5,5 @@ data class Dispute(
     var title: String,
     var creator: Int,
     var type: DisputeType,
-    var descriptions: List<String>
+    var descriptions: String
 )

@@ -1,5 +1,7 @@
 package com.kpfu.itis.data.di
 
+import com.kpfu.itis.data.BuildConfig
+import com.kpfu.itis.data.di.scope.DataScope
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -9,13 +11,12 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
-import javax.inject.Singleton
 
 @Module
 class NetworkModule {
 
     @Provides
-    @Singleton
+    @DataScope
     fun provideRetrofit(
         client: OkHttpClient,
         converterFactory: GsonConverterFactory,
@@ -30,7 +31,7 @@ class NetworkModule {
             .build()
 
     @Provides
-    @Singleton
+    @DataScope
     fun provideOkHttpClient(
         @Named(NAME_API_KEY) apiKeyInterceptor: Interceptor,
         @Named(NAME_LOGGING) loggingInterceptor: Interceptor
@@ -41,25 +42,37 @@ class NetworkModule {
             .build()
 
     @Provides
-    @Singleton
+    @DataScope
     @Named(NAME_BASE_URL)
     fun provideBaseUrlString(): String = ""
 
     @Provides
-    @Singleton
+    @DataScope
     fun provideGsonConverterFactory(): GsonConverterFactory =
         GsonConverterFactory.create()
 
     @Provides
-    @Singleton
+    @DataScope
     fun provideRxJava2CallAdapterFactory(): RxJava2CallAdapterFactory =
         RxJava2CallAdapterFactory.create()
 
     @Provides
-    @Singleton
+    @DataScope
+    @Named(NAME_LOGGING)
     fun provideLoggingInterceptor(): Interceptor = HttpLoggingInterceptor()
         .setLevel(HttpLoggingInterceptor.Level.BODY)
 
+    @Provides
+    @DataScope
+    @Named(NAME_API_KEY)
+    fun provideAuthInterceptor(): Interceptor = Interceptor { chain ->
+        val newUrl = chain.request().url().newBuilder()
+            .addQueryParameter("appid", BuildConfig.API_KEY)
+            .build()
+
+        val newRequest = chain.request().newBuilder().url(newUrl).build()
+        chain.proceed(newRequest)
+    }
     companion object {
         private const val NAME_API_KEY = "ApiKeyInterceptor"
         private const val NAME_LOGGING = "LoggingInterceptor"

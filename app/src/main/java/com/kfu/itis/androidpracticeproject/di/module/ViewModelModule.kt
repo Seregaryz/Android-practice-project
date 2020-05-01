@@ -15,7 +15,7 @@ interface ViewModelModule {
     @IntoMap
     @Binds
     @ViewModelKey(SignInViewModel::class)
-    fun bindComicsViewModel(signInViewModel: SignInViewModel): ViewModel
+    fun bindSignInViewModel(signInViewModel: SignInViewModel): ViewModel
 
     @Binds
     fun bindViewModelFactory(factory: MyViewModelFactory): ViewModelProvider.Factory

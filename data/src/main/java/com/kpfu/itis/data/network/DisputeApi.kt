@@ -1,6 +1,6 @@
 package com.kpfu.itis.data.network
 
-import com.kpfu.itis.data.model.DisputeLocal
+import com.kpfu.itis.core_db.model.DisputeLocal
 
 interface DisputeApi {
 

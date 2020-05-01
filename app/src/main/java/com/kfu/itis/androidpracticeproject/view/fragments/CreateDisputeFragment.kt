@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.kfu.itis.view_model.R
+import com.kfu.itis.androidpracticeproject.R
 
 /**
  * A simple [Fragment] subclass.

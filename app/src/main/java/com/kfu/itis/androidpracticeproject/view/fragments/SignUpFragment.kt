@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.kfu.itis.androidpracticeproject.R
+import kotlinx.android.synthetic.main.fragment_sign_up.*
 
 class SignUpFragment : Fragment() {
 
@@ -43,8 +44,19 @@ class SignUpFragment : Fragment() {
             }
     }
 
+    private fun initClickListeners() {
+        btn_sign_up.setOnClickListener { v -> }
+        reg_btn_sign_in.setOnClickListener { v -> }
+
+    }
+
     private fun updateUI(user: FirebaseUser?) {
 
     }
+
+    companion object {
+        fun newInstance(): SignUpFragment = SignUpFragment()
+    }
+
 
 }

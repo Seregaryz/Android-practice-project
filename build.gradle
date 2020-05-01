@@ -20,7 +20,7 @@ buildscript {
         rxJavaVersion = '2.2.7'
         rxAndroidVersion = '2.1.0'
 
-        architectureComponentVersion = '2.0.0'
+        architectureComponentVersion = '2.2.0'
 
         daggerVersion = '2.25.2'
         javaxInjectVersion = '1'
@@ -72,7 +72,7 @@ buildscript {
         firebaseCoreDep = "com.google.firebase:firebase-core:$firebaseCoreVersion"
         firebaseFirestoneDep = "com.google.firebase:firebase-firestore:$firebaseFirestoneVersion"
 
-        googlePlayServicesDep = "com.google.android.gms:play-services-auth:17.0.0"
+        googlePlayServicesDep = "com.google.android.gms:play-services-auth:15.0.0"
 
     }
     repositories {

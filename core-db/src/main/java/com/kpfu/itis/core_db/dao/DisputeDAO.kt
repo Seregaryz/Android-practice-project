@@ -2,7 +2,7 @@ package com.kpfu.itis.core_db.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.kpfu.itis.data.model.DisputeLocal
+import com.kpfu.itis.core_db.model.DisputeLocal
 
 @Dao
 abstract class DisputeDAO {

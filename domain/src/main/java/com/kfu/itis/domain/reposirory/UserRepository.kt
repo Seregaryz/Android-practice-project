@@ -1,11 +1,13 @@
-package com.kfu.itis.domain.interactor
+package com.kfu.itis.domain.reposirory
 
 import com.kfu.itis.domain.model.user.User
 
-interface UserInteractor {
+interface UserRepository {
     fun getUser(id: Int): User
 
-    fun getUsers(usersId: IntArray): List<User>
+    fun getUsers(): List<User>
+
+    fun saveUser(user: User)
 
     fun currentUserIsNull(): Boolean
 

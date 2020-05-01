@@ -6,8 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.kpfu.itis.core_db.dao.DisputeDAO
 import com.kpfu.itis.core_db.dao.UserDAO
-import com.kpfu.itis.data.model.DisputeLocal
-import com.kpfu.itis.data.model.UserLocal
+import com.kpfu.itis.core_db.model.DisputeLocal
+import com.kpfu.itis.core_db.model.UserLocal
 
 @Database(
     version = 1,

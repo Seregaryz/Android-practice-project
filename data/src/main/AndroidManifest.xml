@@ -1,1 +1,5 @@
-<manifest package="com.kpfu.itis.data" />
+<manifest package="com.kpfu.itis.data"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+</manifest>

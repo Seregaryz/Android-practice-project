@@ -1,4 +1,4 @@
-package com.kpfu.itis.data.model
+package com.kpfu.itis.core_db.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
