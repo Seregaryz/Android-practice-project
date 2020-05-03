@@ -31,4 +31,8 @@ class UserInteractorImpl @Inject constructor(
     override fun getCurrentUser() {
     }
 
+    override fun createAccount(email: String, password: String): Boolean {
+        return userRepository.createAccount(email, password)
+    }
+
 }

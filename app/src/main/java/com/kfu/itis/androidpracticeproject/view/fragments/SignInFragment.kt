@@ -7,15 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.kfu.itis.androidpracticeproject.App
 import com.kfu.itis.androidpracticeproject.R
 import com.kfu.itis.androidpracticeproject.view_model.SignInViewModel
 import kotlinx.android.synthetic.main.fragment_sign_in.*
-import javax.inject.Inject
 
-class SignInFragment : Fragment() {
+class SignInFragment : BaseFragment() {
 
-    @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: SignInViewModel
 
@@ -27,6 +25,7 @@ class SignInFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        App.signInComponent.inject(this)
         initViewModel()
     }
 
@@ -34,12 +33,16 @@ class SignInFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         checkCurrentUser()
         initClickListeners()
-//        auth = FirebaseAuth.getInstance()
-        // Configure Google Sign In
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
+    }
+
+    private fun initViewModel() {
+        val resultViewModel by lazy {
+            ViewModelProvider(
+                this,
+                viewModelFactory
+            ).get(SignInViewModel::class.java)
+        }
+        this.viewModel = resultViewModel
     }
 
     private fun initClickListeners() {
@@ -60,16 +63,6 @@ class SignInFragment : Fragment() {
         auth_btn_sign_up.setOnClickListener {
             navigateToFragment(SignUpFragment.newInstance())
         }
-    }
-
-    private fun initViewModel() {
-        val viewModel by lazy {
-            ViewModelProvider(
-                this,
-                viewModelFactory
-            ).get(SignInViewModel::class.java)
-        }
-        this.viewModel = viewModel
     }
 
     private fun checkCurrentUser() {

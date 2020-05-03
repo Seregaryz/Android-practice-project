@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         initViews()
     }
 
-    fun initViews() {
+    private fun initViews() {
         drawerLayout = findViewById(R.id.drawer)
         bottomNavigationView = findViewById(R.id.bottom_navigation)
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)

@@ -16,4 +16,6 @@ interface UserRepository {
     fun signInWithGoogle(): Boolean
 
     fun getCurrentUser()
+
+    fun createAccount(email: String, password: String): Boolean
 }

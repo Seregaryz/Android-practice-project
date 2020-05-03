@@ -1,4 +1,4 @@
-package com.kfu.itis.androidpracticeproject.view_model
+package com.kfu.itis.androidpracticeproject.di.vm_provide
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

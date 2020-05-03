@@ -1,23 +1,18 @@
 package com.kfu.itis.androidpracticeproject.di.module
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.kfu.itis.androidpracticeproject.view_model.MyViewModelFactory
+import com.kfu.itis.androidpracticeproject.di.vm_provide.ViewModelKey
 import com.kfu.itis.androidpracticeproject.view_model.SignInViewModel
-import com.kfu.itis.androidpracticeproject.view_model.ViewModelKey
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module
-interface ViewModelModule {
+interface SignInModule {
 
     @IntoMap
     @Binds
     @ViewModelKey(SignInViewModel::class)
     fun bindSignInViewModel(signInViewModel: SignInViewModel): ViewModel
-
-    @Binds
-    fun bindViewModelFactory(factory: MyViewModelFactory): ViewModelProvider.Factory
 
 }

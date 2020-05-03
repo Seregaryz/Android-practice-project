@@ -61,10 +61,12 @@ dependencies {
     implementation rxCallAdapterDep
     implementation gsonConvertedDep
     implementation gsonDep
+
     implementation firebaseAuthDep
     implementation firebaseCoreDep
     implementation firebaseFirestoneDep
     implementation googlePlayServicesDep
+    implementation 'com.google.firebase:firebase-database:19.3.0'
 
     //dagger 2
     def daggerVersion = "2.25.2"
@@ -80,8 +82,5 @@ dependencies {
     def room_version = "2.2.4"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
-
-    //firebase
-    implementation 'com.google.firebase:firebase-analytics:17.2.3'
 
 }

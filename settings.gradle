@@ -1,6 +1,5 @@
 rootProject.name='Android practice project'
 include ':app'
-include ':presentation'
 include ':domain'
 include ':core-db'
 include ':data'

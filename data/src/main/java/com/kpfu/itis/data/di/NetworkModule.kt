@@ -1,7 +1,6 @@
 package com.kpfu.itis.data.di
 
 import com.kpfu.itis.data.BuildConfig
-import com.kpfu.itis.data.di.scope.DataScope
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -11,12 +10,13 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
+import javax.inject.Singleton
 
 @Module
 class NetworkModule {
 
     @Provides
-    @DataScope
+    @Singleton
     fun provideRetrofit(
         client: OkHttpClient,
         converterFactory: GsonConverterFactory,
@@ -31,7 +31,7 @@ class NetworkModule {
             .build()
 
     @Provides
-    @DataScope
+    @Singleton
     fun provideOkHttpClient(
         @Named(NAME_API_KEY) apiKeyInterceptor: Interceptor,
         @Named(NAME_LOGGING) loggingInterceptor: Interceptor
@@ -42,28 +42,28 @@ class NetworkModule {
             .build()
 
     @Provides
-    @DataScope
+    @Singleton
     @Named(NAME_BASE_URL)
     fun provideBaseUrlString(): String = ""
 
     @Provides
-    @DataScope
+    @Singleton
     fun provideGsonConverterFactory(): GsonConverterFactory =
         GsonConverterFactory.create()
 
     @Provides
-    @DataScope
+    @Singleton
     fun provideRxJava2CallAdapterFactory(): RxJava2CallAdapterFactory =
         RxJava2CallAdapterFactory.create()
 
     @Provides
-    @DataScope
+    @Singleton
     @Named(NAME_LOGGING)
     fun provideLoggingInterceptor(): Interceptor = HttpLoggingInterceptor()
         .setLevel(HttpLoggingInterceptor.Level.BODY)
 
     @Provides
-    @DataScope
+    @Singleton
     @Named(NAME_API_KEY)
     fun provideAuthInterceptor(): Interceptor = Interceptor { chain ->
         val newUrl = chain.request().url().newBuilder()

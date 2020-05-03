@@ -17,14 +17,14 @@
         tools:layout="@layout/fragment_shop" />
     <fragment
         android:id="@+id/createDispute"
-        android:name="com.kfu.itis.androidpracticeproject.view.fragments.CreateDisputeFragment"
+        android:name="com.kfu.itis.androidpracticeproject.view.fragments.DisputeCreatingFragment"
         android:label="create_dispute"
         tools:layout="@layout/fragment_create_dispute" />
     <fragment
         android:id="@+id/featuredDisputes"
-        android:name="com.kfu.itis.androidpracticeproject.view.fragments.FeaturedDisputesFragment"
+        android:name="com.kfu.itis.androidpracticeproject.view.fragments.LikedDisputesFragment"
         android:label="featured_disputes"
-        tools:layout="@layout/fragment_featured_disputes" />
+        tools:layout="@layout/fragment_liked_disputes" />
     <fragment
         android:id="@+id/profile"
         android:name="com.kfu.itis.androidpracticeproject.view.fragments.ProfileFragment"

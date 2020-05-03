@@ -1,12 +1,11 @@
 package com.kpfu.itis.data.repository
 
-import android.content.Context
+import android.content.ContentValues
 import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.kfu.itis.domain.R
 import com.kfu.itis.domain.model.user.User
 import com.kfu.itis.domain.reposirory.UserRepository
 import com.kpfu.itis.core_db.dao.UserDAO
@@ -16,7 +15,7 @@ import javax.inject.Inject
 public class UserRepositoryImpl @Inject constructor(
     private var auth: FirebaseAuth,
     private var userDAO: UserDAO,
-    private var context: Context
+    private var googleSignInClient: GoogleSignInClient
 ) : UserRepository {
 
     override fun getUser(id: Int): User {
@@ -53,11 +52,6 @@ public class UserRepositoryImpl @Inject constructor(
 
     override fun signInWithGoogle(): Boolean {
         var res = true
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(R.string.default_web_client_id.toString())
-            .requestEmail()
-            .build()
-        val googleSignInClient = GoogleSignIn.getClient(context, gso)
         val signInIntent = googleSignInClient.signInIntent
         val account = GoogleSignIn.getSignedInAccountFromIntent(signInIntent).result
         val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
@@ -97,6 +91,25 @@ public class UserRepositoryImpl @Inject constructor(
             // FirebaseUser.getToken() instead.
             val uid = user.uid
         }
+    }
+
+    override fun createAccount(email: String, password: String): Boolean {
+        var res = true
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(ContentValues.TAG, "createUserWithEmail:success")
+                    val user = auth.currentUser
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
+                    res = false
+                }
+
+                // ...
+            }
+        return res
     }
 
     companion object {
