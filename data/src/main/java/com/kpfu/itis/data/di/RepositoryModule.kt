@@ -5,6 +5,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.kfu.itis.domain.R
 import com.kfu.itis.domain.reposirory.DisputeRepository
 import com.kfu.itis.domain.reposirory.UserRepository
@@ -43,4 +44,9 @@ class RepositoryModule {
     @Singleton
     fun provideGoogleSignInClient(context: Context, gso: GoogleSignInOptions): GoogleSignInClient =
         GoogleSignIn.getClient(context, gso)
+
+    @Provides
+    @Singleton
+    fun provideFirebaseDatabase(): FirebaseDatabase = FirebaseDatabase.getInstance()
+
 }

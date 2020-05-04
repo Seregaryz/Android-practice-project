@@ -1,7 +1,7 @@
 package com.kfu.itis.domain.model.user
 
 data class User(
-    val id: Int,
+    val id: String,
     val username: String,
     val email: String,
     val voicesCount: Int,

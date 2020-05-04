@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.dispute_item.view.*
 
 class DisputeItemHolder(
     override val containerView: View,
-    private val clickLambda: (Int) -> Unit
+    private val clickLambda: (Long) -> Unit
 ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
     fun bind(dispute: Dispute) {
@@ -39,7 +39,7 @@ class DisputeItemHolder(
         const val KEY_WIND = "wind"
         const val KEY_FEELS_LIKE = "feels like"
 
-        fun create(parent: ViewGroup, clickLambda: (Int) -> Unit) =
+        fun create(parent: ViewGroup, clickLambda: (Long) -> Unit) =
             DisputeItemHolder(
                 LayoutInflater.from(parent.context).inflate(R.layout.dispute_item, parent, false),
                 clickLambda

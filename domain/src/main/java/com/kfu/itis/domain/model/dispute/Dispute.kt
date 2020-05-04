@@ -1,9 +1,9 @@
 package com.kfu.itis.domain.model.dispute
 
 data class Dispute(
-    var id: Int,
+    var id: Long,
     var title: String,
-    var creator: Int,
+    var creatorId: String,
     var type: DisputeType,
     var descriptions: String
 )

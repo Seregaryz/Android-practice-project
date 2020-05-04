@@ -21,19 +21,14 @@ class LikedDisputesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? =
-        inflater.inflate(R.layout.fragment_liked_disputes, container, false)
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    ): View? {
         App.likedDisputesComponent.inject(this)
         initViewModel()
+        return inflater.inflate(R.layout.fragment_liked_disputes, container, false)
     }
 
     private fun initViewModel() {
-        val resultViewModel by lazy {
-            ViewModelProvider(this, viewModelFactory).get(LikedDisputesViewModel::class.java)
-        }
-        this.viewModel = resultViewModel
+        viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(LikedDisputesViewModel::class.java)
     }
 }

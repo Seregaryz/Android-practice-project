@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
 import com.kfu.itis.androidpracticeproject.App
 import com.kfu.itis.androidpracticeproject.R
@@ -20,6 +22,7 @@ class DisputeCreatingFragment : BaseFragment(), AdapterView.OnItemSelectedListen
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: DisputeCreatingViewModel
+    lateinit var disputeType: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,10 +49,23 @@ class DisputeCreatingFragment : BaseFragment(), AdapterView.OnItemSelectedListen
             spinner.adapter = adapter
         }
         spinner.onItemSelectedListener = this
+        btn_create_dispute.setOnClickListener {
+            val title = et_dispute_title.text.toString()
+            val description1 = et_dispute_description1.text.toString()
+            val description2 = et_dispute_description2.text.toString()
+            viewModel.disputeLiveData.observe(viewLifecycleOwner, Observer {
+                if (it != null) {
+                    this.view?.let { it1 ->
+                        Navigation.findNavController(it1).navigate(R.id.disputes_list)
+                    }
+                }
+            })
+            viewModel.createDispute(title, description1, description2, disputeType)
+        }
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
-        val disputeType = parent.getItemAtPosition(pos).toString()
+        disputeType = parent.getItemAtPosition(pos).toString()
         Snackbar.make(view, disputeType, Snackbar.LENGTH_SHORT).show()
     }
 
@@ -58,8 +74,8 @@ class DisputeCreatingFragment : BaseFragment(), AdapterView.OnItemSelectedListen
     }
 
     private fun initViewModel() {
-        viewModel =
-            ViewModelProvider(this, viewModelFactory).get(DisputeCreatingViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(DisputeCreatingViewModel::class.java)
     }
 
 }

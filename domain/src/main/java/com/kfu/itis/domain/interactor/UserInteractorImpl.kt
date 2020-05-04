@@ -8,11 +8,11 @@ class UserInteractorImpl @Inject constructor(
     private val userRepository: UserRepository
 ) : UserInteractor {
 
-    override fun getUser(id: Int): User {
+    override fun getUser(id: String): User {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getUsers(usersId: IntArray): List<User> {
+    override fun getUsers(usersId: List<String>): List<User> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

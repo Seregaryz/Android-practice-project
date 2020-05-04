@@ -19,13 +19,15 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         private var instance: AppDatabase? = null
+        private const val DATABASE_NAME = "app.db"
+        private const val DISPUTE_DATABASE_NAME = "disputes.db"
 
         @Synchronized
         fun get(context: Context): AppDatabase {
             if (instance == null) {
                 instance = Room.databaseBuilder(
                     context.applicationContext,
-                    AppDatabase::class.java, "app.db"
+                    AppDatabase::class.java, DATABASE_NAME
                 )
                     .fallbackToDestructiveMigration()
                     .build()
@@ -33,6 +35,11 @@ abstract class AppDatabase : RoomDatabase() {
             return instance!!
         }
     }
+
+//    private fun buildDatabase(context: Context) =
+//        Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
+//            .fallbackToDestructiveMigration()
+//            .build()
 
     abstract fun userDao(): UserDAO
 

@@ -3,30 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@id/disputes">
+    app:startDestination="@id/signUpFragment">
 
     <fragment
-        android:id="@+id/disputes"
+        android:id="@+id/disputes_list"
         android:name="com.kfu.itis.androidpracticeproject.view.fragments.DisputesFragment"
         android:label="disputes"
         tools:layout="@layout/fragment_disputes" />
     <fragment
-        android:id="@+id/shop"
+        android:id="@+id/shop_fragment"
         android:name="com.kfu.itis.androidpracticeproject.view.fragments.ShopFragment"
         android:label="shop"
         tools:layout="@layout/fragment_shop" />
     <fragment
-        android:id="@+id/createDispute"
+        android:id="@+id/dispute_creating_fragment"
         android:name="com.kfu.itis.androidpracticeproject.view.fragments.DisputeCreatingFragment"
         android:label="create_dispute"
         tools:layout="@layout/fragment_create_dispute" />
     <fragment
-        android:id="@+id/featuredDisputes"
+        android:id="@+id/liked_disputes_fragment"
         android:name="com.kfu.itis.androidpracticeproject.view.fragments.LikedDisputesFragment"
         android:label="featured_disputes"
         tools:layout="@layout/fragment_liked_disputes" />
     <fragment
-        android:id="@+id/profile"
+        android:id="@+id/profile_fragment"
         android:name="com.kfu.itis.androidpracticeproject.view.fragments.ProfileFragment"
         android:label="profile"
         tools:layout="@layout/fragment_profile" />
@@ -35,5 +35,10 @@
         android:name="com.kfu.itis.androidpracticeproject.view.fragments.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" />
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.kfu.itis.androidpracticeproject.view.fragments.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" />
 
 </navigation>

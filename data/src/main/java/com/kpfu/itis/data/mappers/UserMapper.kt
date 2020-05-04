@@ -8,7 +8,7 @@ class UserMapper {
     companion object {
         fun toLocalUser(fbUser: FirebaseUser): UserLocal {
             return UserLocal(
-                fbUser.uid.toInt(),
+                fbUser.uid,
                 fbUser.displayName.toString(),
                 fbUser.email.toString(),
                 0,

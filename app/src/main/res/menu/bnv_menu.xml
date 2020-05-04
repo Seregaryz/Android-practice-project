@@ -2,27 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/disputes"
+        android:id="@+id/disputes_list"
         android:icon="@drawable/ic_list"
         android:title="@string/nav_list" />
 
     <item
-        android:id="@+id/shop"
+        android:id="@+id/shop_fragment"
         android:icon="@drawable/ic_shopping_cart_"
         android:title="@string/nav_market" />
 
     <item
-        android:id="@+id/createDispute"
+        android:id="@+id/dispute_creating_fragment"
         android:icon="@drawable/ic_add"
         android:title="@string/nav_add" />
 
     <item
-        android:id="@+id/featuredDisputes"
+        android:id="@+id/liked_disputes_fragment"
         android:icon="@drawable/ic_star"
         android:title="@string/nav_liked" />
 
     <item
-        android:id="@+id/profile"
+        android:id="@+id/profile_fragment"
         android:icon="@drawable/ic_account"
         android:title="@string/nav_profile" />
 

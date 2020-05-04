@@ -12,7 +12,7 @@ abstract class UserDAO {
     abstract fun getUsers(): List<UserLocal>
 
     @Query("select * from users where id =:id")
-    abstract fun getUser(id: Int): UserLocal
+    abstract fun getUser(id: String): UserLocal?
 
     @Insert
     abstract fun save(userLocal: UserLocal)

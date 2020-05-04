@@ -41,6 +41,7 @@ dependencies {
     implementation gsonDep
     implementation rxJavaDep
     implementation rxAndroidDep
+    implementation rxRoomDep
 
     //dagger 2
     def daggerVersion = "2.25.2"

@@ -1,48 +1,42 @@
 package com.kfu.itis.androidpracticeproject.view.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.kfu.itis.androidpracticeproject.App
 import com.kfu.itis.androidpracticeproject.R
 import com.kfu.itis.androidpracticeproject.view_model.SignInViewModel
 import kotlinx.android.synthetic.main.fragment_sign_in.*
+import javax.inject.Inject
 
 class SignInFragment : BaseFragment() {
 
+    @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: SignInViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? =
-        inflater.inflate(R.layout.fragment_sign_in, container, false)
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+    ): View? {
         App.signInComponent.inject(this)
         initViewModel()
+        return inflater.inflate(R.layout.fragment_sign_in, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkCurrentUser()
+        if (!viewModel.currentUserIsNull()) {
+            Navigation.findNavController(view).navigate(R.id.profile_fragment)
+        }
         initClickListeners()
     }
 
     private fun initViewModel() {
-        val resultViewModel by lazy {
-            ViewModelProvider(
-                this,
-                viewModelFactory
-            ).get(SignInViewModel::class.java)
-        }
-        this.viewModel = resultViewModel
+        viewModel = ViewModelProvider(this, viewModelFactory).get(SignInViewModel::class.java)
     }
 
     private fun initClickListeners() {
@@ -51,7 +45,7 @@ class SignInFragment : BaseFragment() {
                 val email = et_email.text.toString()
                 val password = et_password.text.toString()
                 if (viewModel.signIn(email, password)) {
-                    navigateToFragment(ProfileFragment.newInstance())
+                    Navigation.findNavController(it).navigate(R.id.profile_fragment)
                 }
             }
         }
@@ -65,17 +59,11 @@ class SignInFragment : BaseFragment() {
         }
     }
 
-    private fun checkCurrentUser() {
-        if (!viewModel.currentUserIsNull()) {
-            navigateToFragment(ProfileFragment.newInstance())
-        }
-    }
+//    private fun checkCurrentUser() {
+//
+//    }
 
-    private fun navigateToFragment(fragment: Fragment) {
-        val transaction = childFragmentManager.beginTransaction().apply { }
-        transaction.replace(R.id.nav_host_fragment, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+    companion object {
+        fun newInstance(): SignInFragment = SignInFragment()
     }
-
 }

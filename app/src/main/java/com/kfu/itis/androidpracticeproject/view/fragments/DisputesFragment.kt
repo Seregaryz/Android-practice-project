@@ -15,7 +15,6 @@ class DisputesFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-
     lateinit var viewModel: DisputeListViewModel
 
     override fun onCreateView(
@@ -30,14 +29,6 @@ class DisputesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
-
-//    private fun initViewModel() {
-//        val resultViewModel by lazy {
-//            ViewModelProvider(this, viewModelFactory).get(DisputeListViewModel::class.java)
-//        }
-//        this.viewModel = resultViewModel
-//        Log.e("Tag", "Here")
-//    }
 
     private fun initViewModel() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(DisputeListViewModel::class.java)

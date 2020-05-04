@@ -3,7 +3,7 @@ package com.kfu.itis.domain.reposirory
 import com.kfu.itis.domain.model.user.User
 
 interface UserRepository {
-    fun getUser(id: Int): User
+    fun getUser(id: String): User
 
     fun getUsers(): List<User>
 
@@ -15,7 +15,9 @@ interface UserRepository {
 
     fun signInWithGoogle(): Boolean
 
-    fun getCurrentUser()
+    fun getCurrentUser(): User?
+
+    fun getCurrentUserId(): String
 
     fun createAccount(email: String, password: String): Boolean
 }

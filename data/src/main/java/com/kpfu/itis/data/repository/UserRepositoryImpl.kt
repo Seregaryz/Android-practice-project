@@ -18,7 +18,7 @@ public class UserRepositoryImpl @Inject constructor(
     private var googleSignInClient: GoogleSignInClient
 ) : UserRepository {
 
-    override fun getUser(id: Int): User {
+    override fun getUser(id: String): User {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -37,13 +37,13 @@ public class UserRepositoryImpl @Inject constructor(
 
     override fun signIn(email: String, password: String): Boolean {
         //authenticate user
-        var res = true
+        var res = false
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d(TAG, "signInWithEmail:success")
+                    res = true
                 } else {
-                    res = false
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
                 }
             }
@@ -51,7 +51,7 @@ public class UserRepositoryImpl @Inject constructor(
     }
 
     override fun signInWithGoogle(): Boolean {
-        var res = true
+        var res = false
         val signInIntent = googleSignInClient.signInIntent
         val account = GoogleSignIn.getSignedInAccountFromIntent(signInIntent).result
         val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
@@ -62,20 +62,20 @@ public class UserRepositoryImpl @Inject constructor(
                     Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
                     val localUser = user?.let { UserMapper.toLocalUser(it) }
-                    if (localUser != null) {
+                    if (localUser != null && userDAO.getUser(user.uid) == null) {
                         userDAO.save(localUser)
                     }
+                    res = true
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                     //Snackbar.make(binding.mainLayout, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
-                    res = false
                 }
             }
         return res
     }
 
-    override fun getCurrentUser() {
+    override fun getCurrentUser(): User? {
         val user = FirebaseAuth.getInstance().currentUser
         user?.let {
             // Name, email address, and profile photo Url
@@ -91,23 +91,28 @@ public class UserRepositoryImpl @Inject constructor(
             // FirebaseUser.getToken() instead.
             val uid = user.uid
         }
+        return null
     }
 
+    override fun getCurrentUserId(): String {
+        val user = FirebaseAuth.getInstance().currentUser
+        return user?.uid ?: "error"
+    }
+
+
     override fun createAccount(email: String, password: String): Boolean {
-        var res = true
+        var res = false
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(ContentValues.TAG, "createUserWithEmail:success")
                     val user = auth.currentUser
+                    res = true
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
-                    res = false
                 }
-
-                // ...
             }
         return res
     }

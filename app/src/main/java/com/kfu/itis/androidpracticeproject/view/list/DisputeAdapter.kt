@@ -10,7 +10,7 @@ import com.kfu.itis.domain.model.dispute.Dispute
 
 class DisputeAdapter(
     var dataSource: List<Dispute>,
-    var clickLambda: (Int) -> Unit
+    var clickLambda: (Long) -> Unit
 ) : ListAdapter<Dispute, DisputeItemHolder>(object : DiffUtil.ItemCallback<Dispute>() {
 
     override fun areItemsTheSame(oldItem: Dispute, newItem: Dispute): Boolean =
@@ -24,8 +24,8 @@ class DisputeAdapter(
         if (oldItem.title !== newItem.title) {
             diffBundle.putString(KEY_TITLE, newItem.title)
         }
-        if (oldItem.creator != newItem.creator) {
-            diffBundle.putInt(KEY_CREATOR, newItem.creator)
+        if (oldItem.creatorId !== newItem.creatorId) {
+            diffBundle.putString(KEY_CREATOR, newItem.creatorId)
         }
         return if (diffBundle.isEmpty) null else diffBundle
     }

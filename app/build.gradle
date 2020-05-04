@@ -57,8 +57,11 @@ dependencies {
     implementation recyclerViewDep
     implementation materialDep
 
+    implementation rxJavaDep
+    implementation rxAndroidDep
     implementation retrofitDep
     implementation rxCallAdapterDep
+
     implementation gsonConvertedDep
     implementation gsonDep
 

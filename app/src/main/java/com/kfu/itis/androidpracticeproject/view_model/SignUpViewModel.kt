@@ -8,7 +8,7 @@ class SignUpViewModel @Inject constructor(
     private var userInteractor: UserInteractor
 ) : ViewModel() {
 
-    fun createAccount(email: String, password: String) {
-        userInteractor.createAccount(email, password)
+    fun createAccount(email: String, password: String): Boolean {
+        return userInteractor.createAccount(email, password)
     }
 }

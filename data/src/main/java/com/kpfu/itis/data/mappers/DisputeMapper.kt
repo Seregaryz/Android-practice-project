@@ -9,7 +9,7 @@ class DisputeMapper {
     companion object {
         fun toDispute(disputeLocal: DisputeLocal): Dispute {
             return Dispute(
-                disputeLocal.id,
+                disputeLocal.id ?: 0,
                 disputeLocal.title,
                 disputeLocal.ownerId,
                 DisputeType.valueOf(disputeLocal.type),
@@ -18,7 +18,7 @@ class DisputeMapper {
         }
 
         fun toDisputeList(list: List<DisputeLocal>): List<Dispute> {
-            var result = ArrayList<Dispute>()
+            val result = ArrayList<Dispute>()
             for (d in list) {
                 result.add(toDispute(d))
             }
