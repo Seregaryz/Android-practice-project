@@ -1,12 +1,13 @@
 package com.kfu.itis.androidpracticeproject.view.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import com.kfu.itis.androidpracticeproject.App
+import com.kfu.itis.androidpracticeproject.Injector
 import com.kfu.itis.androidpracticeproject.R
 import com.kfu.itis.androidpracticeproject.view_model.SignInViewModel
 import kotlinx.android.synthetic.main.fragment_sign_in.*
@@ -22,9 +23,13 @@ class SignInFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        App.signInComponent.inject(this)
-        initViewModel()
         return inflater.inflate(R.layout.fragment_sign_in, container, false)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Injector.plusSignInComponent().inject(this)
+        initViewModel()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

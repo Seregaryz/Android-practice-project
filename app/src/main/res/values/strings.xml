@@ -11,6 +11,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="default_web_client_id_local">1</string>
     <string name="btn_create_dispute">Create dispute</string>
+    <string name="rv_disputes_item_title">Title</string>
+    <string name="rv_disputes_item_description">Description</string>
+    <string name="dispute_tv_description">Description</string>
+    <string name="btn_vote">Vote</string>
+    <string name="btn_cancel_vote">Cancel vote</string>
+
 
     <string-array name="disputes_type">
         <item>Usual</item>

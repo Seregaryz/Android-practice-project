@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/disputes_list"
-        android:name="com.kfu.itis.androidpracticeproject.view.fragments.DisputesFragment"
+        android:name="com.kfu.itis.androidpracticeproject.view.fragments.DisputesListFragment"
         android:label="disputes"
         tools:layout="@layout/fragment_disputes" />
     <fragment
@@ -40,5 +40,10 @@
         android:name="com.kfu.itis.androidpracticeproject.view.fragments.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" />
+    <fragment
+        android:id="@+id/disputeFragment"
+        android:name="com.kfu.itis.androidpracticeproject.view.fragments.DisputeFragment"
+        android:label="fragment_dispute"
+        tools:layout="@layout/fragment_dispute" />
 
 </navigation>

@@ -9,8 +9,7 @@ import com.kfu.itis.androidpracticeproject.view.list.DisputeItemHolder.Companion
 import com.kfu.itis.domain.model.dispute.Dispute
 
 class DisputeAdapter(
-    var dataSource: List<Dispute>,
-    var clickLambda: (Long) -> Unit
+    private var clickLambda: (String) -> Unit
 ) : ListAdapter<Dispute, DisputeItemHolder>(object : DiffUtil.ItemCallback<Dispute>() {
 
     override fun areItemsTheSame(oldItem: Dispute, newItem: Dispute): Boolean =
@@ -32,9 +31,7 @@ class DisputeAdapter(
 }) {
 
     override fun onBindViewHolder(holder: DisputeItemHolder, position: Int) =
-        holder.bind(dataSource[position])
-
-    override fun getItemCount(): Int = dataSource.size
+        holder.bind(getItem(position))
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisputeItemHolder =
         DisputeItemHolder.create(
@@ -55,17 +52,17 @@ class DisputeAdapter(
         }
     }
 
-    private fun updateList(newList: List<Dispute>) {
-        val result = DiffUtil.calculateDiff(
-            DisputeDiffUtil(
-                dataSource,
-                newList
-            ), true
-        )
-        result.dispatchUpdatesTo(this)
-        val temp = dataSource.toMutableList()
-        temp.clear()
-        temp.addAll(newList)
-        dataSource = temp.toList()
-    }
+//    private fun updateList(newList: List<Dispute>) {
+//        val result = DiffUtil.calculateDiff(
+//            DisputeDiffUtil(
+//                dataSource,
+//                newList
+//            ), true
+//        )
+//        result.dispatchUpdatesTo(this)
+//        val temp = dataSource.toMutableList()
+//        temp.clear()
+//        temp.addAll(newList)
+//        dataSource = temp.toList()
+//    }
 }

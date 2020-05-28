@@ -11,26 +11,31 @@ class DisputeCreatingViewModel @Inject constructor(
     private val disputeInteractor: DisputeInteractor
 ) : BaseViewModel() {
 
-    private var disputeMutableLiveData = MutableLiveData<Long>()
-    var disputeLiveData: LiveData<Long> = disputeMutableLiveData
+    private var disputeMutableLiveData = MutableLiveData<String>()
+    var disputeLiveData: LiveData<String> = disputeMutableLiveData
 
     fun createDispute(
         title: String, description1: String,
         description2: String, disputeType: String
     ) {
+        val key = disputeInteractor.createDisputeInFirebaseDd(
+            title,
+            description1,
+            description2,
+            disputeType
+        )
         disposables.add(
-            disputeInteractor.createDisputeInLocalBd(title, description1, description2, disputeType)
+            disputeInteractor.createDisputeInLocalBd(
+                key,
+                title,
+                description1,
+                description2,
+                disputeType
+            )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    disputeMutableLiveData.value = it
-                    disputeInteractor.createDisputeInFirebaseDd(
-                        it,
-                        title,
-                        description1,
-                        description2,
-                        disputeType
-                    )
+                    disputeMutableLiveData.value = key
                 }, {
                     it.printStackTrace()
                 })

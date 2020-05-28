@@ -1,5 +1,6 @@
 package com.kfu.itis.androidpracticeproject.view.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
-import com.kfu.itis.androidpracticeproject.App
+import com.kfu.itis.androidpracticeproject.Injector
 import com.kfu.itis.androidpracticeproject.R
 import com.kfu.itis.androidpracticeproject.view_model.SignUpViewModel
 import kotlinx.android.synthetic.main.fragment_sign_up.*
@@ -23,9 +24,13 @@ class SignUpFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        App.signUpComponent.inject(this)
-        initViewModel()
         return inflater.inflate(R.layout.fragment_sign_up, container, false)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Injector.plusSignUpComponent().inject(this)
+        initViewModel()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -64,6 +64,7 @@ dependencies {
     implementation rxJavaDep
     implementation rxAndroidDep
     implementation rxRoomDep
+    implementation 'com.github.frangsierra:rxfirebase:1.5.7'
     //implementation "android.arch.persistence.room:rxjava2:1.1.1"
 
     //firebase

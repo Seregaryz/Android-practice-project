@@ -8,16 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kfu.itis.androidpracticeproject.R
 import com.kfu.itis.domain.model.dispute.Dispute
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.dispute_item.view.*
+import kotlinx.android.synthetic.main.disputes_item.view.*
 
 class DisputeItemHolder(
     override val containerView: View,
-    private val clickLambda: (Long) -> Unit
+    private val clickLambda: (String) -> Unit
 ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
     fun bind(dispute: Dispute) {
         containerView.apply {
             tv_title.text = dispute.title
+            tv_description.text = dispute.descriptions
             itemView.setOnClickListener {
                 clickLambda(dispute.id)
             }
@@ -35,13 +36,10 @@ class DisputeItemHolder(
     companion object {
         const val KEY_TITLE = "title"
         const val KEY_CREATOR = "creator"
-        const val KEY_CLOUDS = "clouds"
-        const val KEY_WIND = "wind"
-        const val KEY_FEELS_LIKE = "feels like"
 
-        fun create(parent: ViewGroup, clickLambda: (Long) -> Unit) =
+        fun create(parent: ViewGroup, clickLambda: (String) -> Unit) =
             DisputeItemHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.dispute_item, parent, false),
+                LayoutInflater.from(parent.context).inflate(R.layout.disputes_item, parent, false),
                 clickLambda
             )
     }

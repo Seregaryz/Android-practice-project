@@ -61,6 +61,7 @@ dependencies {
     implementation rxAndroidDep
     implementation retrofitDep
     implementation rxCallAdapterDep
+    implementation 'com.github.frangsierra:rxfirebase:1.5.7'
 
     implementation gsonConvertedDep
     implementation gsonDep

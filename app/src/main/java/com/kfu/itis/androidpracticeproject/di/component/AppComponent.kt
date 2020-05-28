@@ -41,6 +41,8 @@ interface AppComponent {
 
     fun plusDisputeListComponent(): DisputeListComponent.Builder
 
+    fun plusDisputeComponent(): DisputeComponent.Builder
+
     @Component.Builder
     interface Builder {
         @BindsInstance

@@ -1,27 +1,32 @@
 package com.kfu.itis.domain.interactor
 
 import com.kfu.itis.domain.model.dispute.Dispute
-import io.reactivex.Single
+import io.reactivex.Completable
+import io.reactivex.Observable
 
 
 interface DisputeInteractor {
 
-    fun getDisputes(): List<Dispute>?
+    fun getDisputes(): Observable<List<Dispute>>
 
-    fun getDispute(id: Long): Dispute?
+    fun getDisputeFromDb(id: String): Observable<Dispute>
+
+    fun getDisputeFromFb(id: String): Observable<Dispute>
 
     fun createDisputeInLocalBd(
+        id: String,
         title: String,
         description1: String,
         description2: String,
         disputeType: String
-    ): Single<Long>
+    ): Completable
 
     fun createDisputeInFirebaseDd(
-        id: Long,
         title: String,
         description1: String,
         description2: String,
         disputeType: String
-    ): Boolean
+    ): String
+
+    fun vote(dispute: Dispute): Completable
 }
