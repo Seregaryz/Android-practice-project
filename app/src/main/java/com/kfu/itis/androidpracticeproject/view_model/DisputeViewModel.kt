@@ -14,6 +14,7 @@ class DisputeViewModel @Inject constructor(
 
     private val disputeMutableLiveData = MutableLiveData<Dispute>()
     val disputeLiveData: LiveData<Dispute> = disputeMutableLiveData
+    lateinit var currentDispute: Dispute
     var key: String = "null"
 
     fun getDispute(disputeId: String): Boolean {
@@ -42,25 +43,29 @@ class DisputeViewModel @Inject constructor(
         return isFinished
     }
 
-    fun vote(isPlus: Boolean) {
-        val updatedDispute = disputeLiveData.value
-        if (isPlus) {
-            disputeLiveData.value?.firstPosVoicesCount?.plus(1)
-        } else disputeLiveData.value?.firstPosVoicesCount?.minus(1)
-        if (updatedDispute?.firstPosVoicesCount!! >= 50) {
-            updatedDispute.isFinished = true
-        }
+    fun vote(key: String): Boolean {
+        var isSuccess = true
         disposables.add(
-            disputeInteractor.vote(updatedDispute)
+            disputeInteractor.vote(currentDispute, key)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete { isSuccess = true }
+                .doOnError { isSuccess = false }
                 .subscribe()
         )
-        getDispute(updatedDispute.id)
+        getDispute(currentDispute.id)
+        return isSuccess
     }
 
 
     fun updateView() {
 
+    }
+
+    companion object {
+        const val IS_FIRST_PLUS_KEY = "first plus"
+        const val IS_FIRST_MINUS_KEY = "first minus"
+        const val IS_SECOND_PLUS_KEY = "second plus"
+        const val IS_SECOND_MINUS_KEY = "second minus"
     }
 }

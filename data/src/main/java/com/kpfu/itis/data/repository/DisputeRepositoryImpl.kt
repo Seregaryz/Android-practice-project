@@ -1,7 +1,8 @@
 package com.kpfu.itis.data.repository
 
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.GenericTypeIndicator
+import android.content.ContentValues.TAG
+import android.util.Log
+import com.google.firebase.database.*
 import com.kfu.itis.domain.model.dispute.Dispute
 import com.kfu.itis.domain.reposirory.DisputeRepository
 import com.kfu.itis.domain.reposirory.UserRepository
@@ -77,11 +78,73 @@ class DisputeRepositoryImpl @Inject constructor(
         return key
     }
 
-    override fun updateDispute(dispute: Dispute): Completable {
-        val updatedDisputeLocal = DisputeMapper.toDisputeLocal(dispute)
-        val query = myRef.child(dispute.id)
-        query.setValue(dispute)
-        return disputeDAO.updateDispute(updatedDisputeLocal)
+    override fun updateDispute(dispute: Dispute, key: String): Completable {
+        var isSuccess = true
+        var errorMessage = ""
+        var count = 0
+        //Не обновляются данные для локальной бд
+        var updatedDisputeLocal = DisputeMapper.toDisputeLocal(dispute)
+        val query = myRef
+        var countQuery = myRef
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val indicator = object :
+                    GenericTypeIndicator<Map<String, @kotlin.jvm.JvmSuppressWildcards DisputeLocal>>() {}
+                val disputeSnapshotFromFb = dataSnapshot.getValue(indicator)
+                val disputeFromFb = disputeSnapshotFromFb!![updatedDisputeLocal.id] ?: error("")
+                Log.d(TAG, "Value is: $disputeFromFb")
+                if (disputeFromFb.firstPosVoicesCount < 50 && disputeFromFb.secondPosVoicesCount < 50) {
+                    when (key) {
+                        IS_FIRST_PLUS_KEY -> {
+                            count = disputeFromFb.firstPosVoicesCount.plus(1)
+                            updatedDisputeLocal.firstPosVoicesCount.plus(1)
+                            Log.e(TAG, updatedDisputeLocal.firstPosVoicesCount.toString())
+                            countQuery =
+                                query.child(updatedDisputeLocal.id).child("firstPosVoicesCount")
+                            countQuery.setValue(count)
+                        }
+                        IS_FIRST_MINUS_KEY -> {
+                            count = disputeFromFb.firstPosVoicesCount.minus(1)
+                            updatedDisputeLocal.firstPosVoicesCount.minus(1)
+                            Log.e(TAG, updatedDisputeLocal.firstPosVoicesCount.toString())
+                            countQuery =
+                                query.child(updatedDisputeLocal.id).child("firstPosVoicesCount")
+                            countQuery.setValue(count)
+                        }
+                        IS_SECOND_PLUS_KEY -> {
+                            count = disputeFromFb.secondPosVoicesCount.plus(1)
+                            updatedDisputeLocal.secondPosVoicesCount.plus(1)
+                            countQuery =
+                                query.child(updatedDisputeLocal.id).child("secondPosVoicesCount")
+                            countQuery.setValue(count)
+                        }
+                        IS_SECOND_MINUS_KEY -> {
+                            count = disputeFromFb.secondPosVoicesCount.minus(1)
+                            updatedDisputeLocal.secondPosVoicesCount.minus(1)
+                            countQuery =
+                                query.child(updatedDisputeLocal.id).child("secondPosVoicesCount")
+                            countQuery.setValue(count)
+                        }
+                    }
+                    if (disputeFromFb.secondPosVoicesCount >= 50 || disputeFromFb.firstPosVoicesCount >= 50) {
+                        val isFinishedQuery = query.child("finished")
+                        isFinishedQuery.setValue(true)
+                        disputeFromFb.isFinished = true
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                isSuccess = false
+                errorMessage = error.message
+                Log.w(TAG, "Failed to read value.", error.toException())
+            }
+        })
+        return if (isSuccess) {
+            Log.e(TAG, updatedDisputeLocal.firstPosVoicesCount.toString() + " in local bd")
+            disputeDAO.updateDispute(updatedDisputeLocal)
+        } else Completable.error(Throwable(errorMessage))
     }
 
     override fun getDisputeFromDb(id: String): Observable<Dispute> {
@@ -111,6 +174,10 @@ class DisputeRepositoryImpl @Inject constructor(
     companion object {
         const val CREATING_COUNT = 0
         const val CREATING_STATUS = false
+        const val IS_FIRST_PLUS_KEY = "first plus"
+        const val IS_FIRST_MINUS_KEY = "first minus"
+        const val IS_SECOND_PLUS_KEY = "second plus"
+        const val IS_SECOND_MINUS_KEY = "second minus"
     }
 
 }

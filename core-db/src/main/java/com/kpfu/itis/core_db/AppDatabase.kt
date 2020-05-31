@@ -10,7 +10,7 @@ import com.kpfu.itis.core_db.model.DisputeLocal
 import com.kpfu.itis.core_db.model.UserLocal
 
 @Database(
-    version = 3,
+    version = 6,
     entities = [
         UserLocal::class, DisputeLocal::class
     ]

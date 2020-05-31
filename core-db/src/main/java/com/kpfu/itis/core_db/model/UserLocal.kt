@@ -10,7 +10,8 @@ data class UserLocal(
     val username: String,
     val email: String,
     val voicesCount: Int,
-    val winCount: Int
+    val winCount: Int,
+    val pointsCount: Int
 ) {
 
 }

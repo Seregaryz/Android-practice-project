@@ -28,5 +28,5 @@ interface DisputeInteractor {
         disputeType: String
     ): String
 
-    fun vote(dispute: Dispute): Completable
+    fun vote(dispute: Dispute, key: String): Completable
 }

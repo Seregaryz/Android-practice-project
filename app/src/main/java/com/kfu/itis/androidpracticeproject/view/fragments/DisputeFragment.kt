@@ -49,6 +49,8 @@ class DisputeFragment : Fragment() {
             if (viewModel.disputeLiveData.value?.isFinished == true) {
                 //навигируемся на другой экран
             } else {
+                showSnackBar("Get/Update")
+                viewModel.currentDispute = viewModel.disputeLiveData.value!!
                 tv_title.text = viewModel.disputeLiveData.value?.title
                 tv_description1.text =
                     viewModel.disputeLiveData.value?.firstPosVoicesCount.toString()
@@ -66,37 +68,53 @@ class DisputeFragment : Fragment() {
         btn_vote_desc1.setOnClickListener {
             if (!isButton1Chosen) {
                 isButton1Chosen = true
-                viewModel.vote(true)
-                btn_vote_desc1.text = BUTTON_CANCEL_VOTE
-                btn_vote_desc2.isClickable = false
-                showSnackBar(viewModel.disputeLiveData.value?.firstPosVoicesCount.toString())
-                viewModel.getDispute(disputeId)
+                if (!voteAction(DisputeViewModel.IS_FIRST_PLUS_KEY)) {
+                    //показать ошибку отправки данных
+                } else {
+                    btn_vote_desc1.text = BUTTON_CANCEL_VOTE
+                    btn_vote_desc2.isClickable = false
+                    showSnackBar("vote")
+                    viewModel.getDispute(disputeId)
+                }
             } else {
                 isButton1Chosen = false
-                viewModel.vote(false)
-                btn_vote_desc1.text = BUTTON_VOTE
-                btn_vote_desc2.isClickable = true
-                showSnackBar(viewModel.disputeLiveData.value?.firstPosVoicesCount.toString())
-                viewModel.getDispute(disputeId)
+                if (!voteAction(DisputeViewModel.IS_FIRST_MINUS_KEY)) {
+                    //показать ошибку отправки данных
+                } else {
+                    btn_vote_desc1.text = BUTTON_VOTE
+                    btn_vote_desc2.isClickable = true
+                    showSnackBar(viewModel.disputeLiveData.value?.firstPosVoicesCount.toString())
+                    viewModel.getDispute(disputeId)
+                }
             }
         }
         btn_vote_desc2.setOnClickListener {
             if (!isButton2Chosen) {
                 isButton2Chosen = true
-                viewModel.vote(true)
-                btn_vote_desc2.text = BUTTON_CANCEL_VOTE
-                btn_vote_desc1.isClickable = false
-                showSnackBar(viewModel.disputeLiveData.value?.secondPosVoicesCount.toString())
-                viewModel.getDispute(disputeId)
+                if (!voteAction(DisputeViewModel.IS_SECOND_PLUS_KEY)) {
+                    //показать ошибку отправки данных
+                } else {
+                    btn_vote_desc2.text = BUTTON_CANCEL_VOTE
+                    btn_vote_desc1.isClickable = false
+                    showSnackBar(viewModel.disputeLiveData.value?.secondPosVoicesCount.toString())
+                    viewModel.getDispute(disputeId)
+                }
             } else {
                 isButton2Chosen = false
-                viewModel.vote(false)
-                btn_vote_desc2.text = BUTTON_VOTE
-                btn_vote_desc1.isClickable = true
-                showSnackBar(viewModel.disputeLiveData.value?.secondPosVoicesCount.toString())
-                viewModel.getDispute(disputeId)
+                if (!voteAction(DisputeViewModel.IS_SECOND_MINUS_KEY)) {
+                    //показать ошибку отправки данных
+                } else {
+                    btn_vote_desc2.text = BUTTON_VOTE
+                    btn_vote_desc1.isClickable = true
+                    showSnackBar(viewModel.disputeLiveData.value?.secondPosVoicesCount.toString())
+                    viewModel.getDispute(disputeId)
+                }
             }
         }
+    }
+
+    private fun voteAction(key: String): Boolean {
+        return viewModel.vote(key)
     }
 
     private fun showSnackBar(message: String) {

@@ -23,7 +23,7 @@ class DisputeMapper {
         fun toDisputeLocal(dispute: Dispute): DisputeLocal {
             return DisputeLocal(
                 dispute.id,
-                dispute.creatorId,
+                dispute.ownerId,
                 dispute.title,
                 dispute.descriptions,
                 dispute.type.name,

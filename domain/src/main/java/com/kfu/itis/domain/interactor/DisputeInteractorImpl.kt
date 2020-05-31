@@ -34,8 +34,8 @@ class DisputeInteractorImpl @Inject constructor(
         )
     }
 
-    override fun vote(dispute: Dispute): Completable {
-        return disputeRepository.updateDispute(dispute)
+    override fun vote(dispute: Dispute, key: String): Completable {
+        return disputeRepository.updateDispute(dispute, key)
     }
 
     override fun createDisputeInLocalBd(

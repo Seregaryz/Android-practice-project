@@ -23,8 +23,8 @@ class DisputeAdapter(
         if (oldItem.title !== newItem.title) {
             diffBundle.putString(KEY_TITLE, newItem.title)
         }
-        if (oldItem.creatorId !== newItem.creatorId) {
-            diffBundle.putString(KEY_CREATOR, newItem.creatorId)
+        if (oldItem.ownerId !== newItem.ownerId) {
+            diffBundle.putString(KEY_CREATOR, newItem.ownerId)
         }
         return if (diffBundle.isEmpty) null else diffBundle
     }

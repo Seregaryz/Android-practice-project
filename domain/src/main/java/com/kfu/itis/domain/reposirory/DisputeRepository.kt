@@ -29,5 +29,5 @@ interface DisputeRepository {
         disputeType: String
     ): String
 
-    fun updateDispute(dispute: Dispute): Completable
+    fun updateDispute(dispute: Dispute, key: String): Completable
 }

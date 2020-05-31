@@ -12,6 +12,7 @@ class UserMapper {
                 fbUser.displayName.toString(),
                 fbUser.email.toString(),
                 0,
+                0,
                 0
             )
         }
