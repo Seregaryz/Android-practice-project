@@ -17,16 +17,20 @@ interface DisputeRepository {
     fun createDisputeInLocalBd(
         id: String,
         title: String,
-        description1: String,
-        description2: String,
-        disputeType: String
+        description: String,
+        position1: String,
+        position2: String,
+        disputeType: String,
+        tag: String
     ): Completable
 
     fun createDisputeInFirebase(
         title: String,
-        description1: String,
-        description2: String,
-        disputeType: String
+        description: String,
+        position1: String,
+        position2: String,
+        disputeType: String,
+        tag: String
     ): String
 
     fun updateDispute(dispute: Dispute, key: String): Completable

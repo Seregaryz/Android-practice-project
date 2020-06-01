@@ -50,11 +50,15 @@ class DisputeFragment : Fragment() {
                 //навигируемся на другой экран
             } else {
                 showSnackBar("Get/Update")
+                val positions = viewModel.disputeLiveData.value?.positions?.split("_")
                 viewModel.currentDispute = viewModel.disputeLiveData.value!!
                 tv_title.text = viewModel.disputeLiveData.value?.title
-                tv_description1.text =
-                    viewModel.disputeLiveData.value?.firstPosVoicesCount.toString()
-                tv_description2.text = viewModel.disputeLiveData.value?.descriptions
+                val tag = viewModel.disputeLiveData.value?.tag ?: "error"
+                tv_tag.text = tag
+                tv_tag.setBackgroundColor(viewModel.getTagColor(tag))
+                tv_description.text = viewModel.disputeLiveData.value?.description
+                tv_first_position.text = positions?.get(0) ?: "First position"
+                tv_description2.text = positions?.get(1) ?: "Second position"
             }
         })
         viewModel.getDispute(disputeId)

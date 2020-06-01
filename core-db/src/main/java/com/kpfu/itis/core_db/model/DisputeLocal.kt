@@ -13,9 +13,11 @@ data class DisputeLocal(
     var id: String = "",
     var ownerId: String = "",
     var title: String = "",
-    var descriptions: String = "",
+    var description: String = "",
+    var positions: String = "",
     var type: String = "",
     var firstPosVoicesCount: Int = 0,
     var secondPosVoicesCount: Int = 0,
-    var isFinished: Boolean = true
+    var isFinished: Boolean = true,
+    var tag: String = ""
 ) : Serializable

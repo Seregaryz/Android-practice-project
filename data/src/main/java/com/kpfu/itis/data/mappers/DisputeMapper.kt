@@ -11,12 +11,14 @@ class DisputeMapper {
             return Dispute(
                 disputeLocal.id,
                 disputeLocal.title,
+                disputeLocal.description,
                 disputeLocal.ownerId,
                 DisputeType.valueOf(disputeLocal.type),
-                disputeLocal.descriptions,
+                disputeLocal.positions,
                 disputeLocal.firstPosVoicesCount,
                 disputeLocal.secondPosVoicesCount,
-                disputeLocal.isFinished
+                disputeLocal.isFinished,
+                disputeLocal.tag
             )
         }
 
@@ -25,11 +27,13 @@ class DisputeMapper {
                 dispute.id,
                 dispute.ownerId,
                 dispute.title,
-                dispute.descriptions,
+                dispute.description,
+                dispute.positions,
                 dispute.type.name,
                 dispute.firstPosVoicesCount,
                 dispute.secondPosVoicesCount,
-                dispute.isFinished
+                dispute.isFinished,
+                dispute.tag
             )
         }
 

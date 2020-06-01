@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.kfu.itis.androidpracticeproject.Injector
@@ -37,6 +38,7 @@ class SignInFragment : BaseFragment() {
         if (!viewModel.currentUserIsNull()) {
             Navigation.findNavController(view).navigate(R.id.profile_fragment)
         }
+        subscribe(viewModel)
         initClickListeners()
     }
 
@@ -44,23 +46,30 @@ class SignInFragment : BaseFragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(SignInViewModel::class.java)
     }
 
-    private fun initClickListeners() {
-        btn_auth.setOnClickListener {
-            run {
-                val email = et_email.text.toString()
-                val password = et_password.text.toString()
-                if (viewModel.signIn(email, password)) {
-                    Navigation.findNavController(it).navigate(R.id.profile_fragment)
+    private fun subscribe(viewModel: SignInViewModel) {
+        viewModel.userLiveData.observe(viewLifecycleOwner, Observer {
+            viewModel.userLiveData.value.let { it1 ->
+                if (it1 != null) {
+                    viewModel.signInLocalBd(it1)
                 }
             }
-        }
-        btn_google_sign_in.setOnClickListener {
-            run {
-                viewModel.signInWithGoogle()
+        })
+    }
+
+    private fun initClickListeners() {
+        btn_auth.setOnClickListener {
+            val email = et_email.text.toString()
+            val password = et_password.text.toString()
+            if (viewModel.signIn(email, password)) {
+                Navigation.findNavController(it).navigate(R.id.profile_fragment)
             }
         }
+//        btn_google_sign_in.setOnClickListener {
+//            viewModel.signInWithGoogle()
+//
+//        }
         auth_btn_sign_up.setOnClickListener {
-            navigateToFragment(SignUpFragment.newInstance())
+            Navigation.findNavController(it).navigate(R.id.signUpFragment)
         }
     }
 

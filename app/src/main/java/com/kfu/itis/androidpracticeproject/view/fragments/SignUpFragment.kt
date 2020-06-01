@@ -42,8 +42,12 @@ class SignUpFragment : BaseFragment() {
         btn_sign_up.setOnClickListener {
             val email = et_email.text.toString()
             val password = et_password.text.toString()
-            if (createAccount(email, password)) {
-                view?.let { it1 -> Snackbar.make(it1, "Success", Snackbar.LENGTH_SHORT).show() }
+            val username = et_username.text.toString()
+            if (createAccount(email, password, username)) {
+                view?.let { it1 ->
+                    Snackbar.make(it1, "Success", Snackbar.LENGTH_SHORT).show()
+                }
+                Navigation.findNavController(it).navigate(R.id.signInFragment)
             } else view?.let { it1 -> Snackbar.make(it1, "Error", Snackbar.LENGTH_SHORT).show() }
         }
         reg_btn_sign_in.setOnClickListener {
@@ -51,8 +55,8 @@ class SignUpFragment : BaseFragment() {
         }
     }
 
-    private fun createAccount(email: String, password: String): Boolean {
-        return viewModel.createAccount(email, password)
+    private fun createAccount(email: String, password: String, username: String): Boolean {
+        return viewModel.createAccount(email, password, username)
     }
 
     private fun initViewModel() {

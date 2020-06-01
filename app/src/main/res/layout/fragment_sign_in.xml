@@ -1,76 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.kfu.itis.androidpracticeproject.view.fragments.SignInFragment">
 
-    <TextView
-        android:id="@+id/tv_auth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Authentification"
-        android:textSize="20pt"
+    <ImageView
+        android:id="@+id/img_icon_login"
+        android:layout_width="192dp"
+        android:layout_height="192dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_conversation"
         app:layout_constraintBottom_toTopOf="@+id/et_email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/et_email"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:ems="10"
-        android:hint="Email"
+        android:hint="@string/et_email"
+        android:textColor="@color/primary_text"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/et_password"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_auth" />
+        app:layout_constraintTop_toBottomOf="@+id/img_icon_login" />
 
     <EditText
         android:id="@+id/et_password"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Password"
+        android:textColor="@color/primary_text"
+        android:hint="@string/et_password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/btn_auth"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
     <Button
         android:id="@+id/btn_auth"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign in"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/auth_btn_sign_up"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:text="@string/btn_log_in"
+        android:layout_marginHorizontal="16dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/icons"
+        app:layout_constraintBottom_toTopOf="@id/auth_btn_sign_up"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_password" />
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_or"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="@string/tv_or"-->
+    <!--        android:textSize="12sp"-->
+    <!--        android:textColor="@color/secondary_text"-->
+    <!--        app:layout_constraintBottom_toTopOf="@id/btn_google_sign_in"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/btn_auth" />-->
+
+    <!--    <com.google.android.gms.common.SignInButton-->
+    <!--        android:id="@+id/btn_google_sign_in"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="@string/btn_google_sign_in"-->
+    <!--        android:layout_marginHorizontal="16dp"-->
+    <!--        app:layout_constraintBottom_toTopOf="@id/auth_btn_sign_up"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/tv_or" />-->
 
     <Button
         android:id="@+id/auth_btn_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/btn_auth"
-        app:layout_constraintTop_toBottomOf="@+id/et_password" />
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/btn_google_sign_in"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign in with Google"
+        android:text="@string/auth_btn_sign_up"
+        android:textColor="@color/special_text"
+        android:background="@null"
+        style="@style/MyButtonStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

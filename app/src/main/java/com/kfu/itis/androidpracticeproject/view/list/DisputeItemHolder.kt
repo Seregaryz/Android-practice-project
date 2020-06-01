@@ -1,5 +1,6 @@
 package com.kfu.itis.androidpracticeproject.view.list
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +19,12 @@ class DisputeItemHolder(
     fun bind(dispute: Dispute) {
         containerView.apply {
             tv_title.text = dispute.title
-            tv_description.text = dispute.descriptions
+            if (dispute.description.length > 30) {
+                val desc = dispute.description.substring(0, 30) + "..."
+                tv_description.text = desc
+            } else tv_description.text = dispute.description
+            tv_tag.text = dispute.tag
+            tv_tag.setBackgroundColor(getTagColor(dispute.tag))
             itemView.setOnClickListener {
                 clickLambda(dispute.id)
             }
@@ -31,6 +37,19 @@ class DisputeItemHolder(
                 tv_title.text = getString(KEY_TITLE)
             }
         }
+    }
+
+    fun getTagColor(tag: String): Int {
+        when (tag) {
+            "Cars" -> return Color.parseColor("#C71585")
+            "Geographic" -> return Color.parseColor("#00FF00")
+            "Love" -> return Color.parseColor("#FF0000")
+            "Politic" -> return Color.parseColor("#0000CD")
+            "Sport" -> return Color.parseColor("#800080")
+            "Cinema" -> return Color.parseColor("#00CED1")
+            "Art" -> return Color.parseColor("#FF8C00")
+        }
+        return 0
     }
 
     companion object {

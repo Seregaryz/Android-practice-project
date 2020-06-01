@@ -1,9 +1,12 @@
 package com.kfu.itis.domain.model.user
 
 data class User(
-    val id: String,
-    val username: String,
-    val email: String,
-    val voicesCount: Int,
-    val winCount: Int
+    var id: String,
+    var username: String,
+    var email: String,
+    var voicesCount: Int,
+    var winCount: Int,
+    var pointsCount: Int,
+    var isAuthorized: Boolean
+
 )

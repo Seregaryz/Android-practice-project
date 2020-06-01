@@ -5,13 +5,14 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "users")
 data class UserLocal(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = false)
     val id: String,
     val username: String,
     val email: String,
     val voicesCount: Int,
     val winCount: Int,
-    val pointsCount: Int
+    val pointsCount: Int,
+    val isAuthorized: Boolean
 ) {
 
 }

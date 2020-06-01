@@ -6,28 +6,72 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.GenericTypeIndicator
+import com.kfu.itis.domain.model.dispute.Dispute
 import com.kfu.itis.domain.model.user.User
 import com.kfu.itis.domain.reposirory.UserRepository
 import com.kpfu.itis.core_db.dao.UserDAO
+import com.kpfu.itis.core_db.dao.VoiceDAO
+import com.kpfu.itis.core_db.model.DisputeLocal
+import com.kpfu.itis.data.mappers.DisputeMapper
 import com.kpfu.itis.data.mappers.UserMapper
+import durdinapps.rxfirebase2.RxFirebaseDatabase
+import io.reactivex.Completable
+import io.reactivex.Observable
 import javax.inject.Inject
 
-public class UserRepositoryImpl @Inject constructor(
+class UserRepositoryImpl @Inject constructor(
     private var auth: FirebaseAuth,
     private var userDAO: UserDAO,
-    private var googleSignInClient: GoogleSignInClient
+    private var voiceDao: VoiceDAO,
+    private var googleSignInClient: GoogleSignInClient,
+    private val database: FirebaseDatabase
 ) : UserRepository {
 
-    override fun getUser(id: String): User {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    private var myRef = database.getReference("dispute")
+
+    override fun getUser(id: String): Observable<User> {
+        return userDAO.getUser(id).map { item -> updateUser(UserMapper.toUser(item)) }
     }
 
-    override fun getUsers(): List<User> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun updateUser(user: User): User {
+        val disputes = getDisputesFromFb().blockingFirst()
+        val voices = voiceDao.getVoices(user.id).blockingFirst()
+        var wins = 0
+        for (voice in voices) {
+            for (dispute in disputes) {
+                if (voice.disputeId == dispute.id && dispute.isFinished) {
+                    wins++
+                }
+            }
+        }
+        val newWins = wins - user.winCount
+        user.pointsCount = user.pointsCount + newWins * 10
+        user.winCount = wins
+        return user
     }
 
-    override fun saveUser(user: User) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    private fun getDisputesFromFb(): Observable<List<Dispute>> {
+        val query = myRef
+        val indicator = object :
+            GenericTypeIndicator<Map<String, @kotlin.jvm.JvmSuppressWildcards DisputeLocal>>() {}
+        return RxFirebaseDatabase.observeSingleValueEvent(query)
+            .toObservable()
+            .flatMap { list ->
+                Observable.fromIterable(list.getValue(indicator)?.values)
+                    .map { item -> DisputeMapper.toDispute(item) }
+                    .toList()
+                    .toObservable()
+            }
+    }
+
+    override fun updateUserInLocalBd(user: User): Completable {
+        return userDAO.updateUser(UserMapper.toLocalUserFromUser(user))
+    }
+
+    override fun saveUserInLocalBd(user: User): Completable {
+        return userDAO.save(UserMapper.toLocalUserFromUser(user))
     }
 
     override fun currentUserIsNull(): Boolean {
@@ -35,19 +79,22 @@ public class UserRepositoryImpl @Inject constructor(
         return currentUser == null
     }
 
-    override fun signIn(email: String, password: String): Boolean {
+    override fun signIn(email: String, password: String): String {
         //authenticate user
-        var res = false
+        var res = true
+        var userId = ""
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Log.d(TAG, "signInWithEmail:success")
+                    Log.d(TAG, "signInWithEmail:success ${auth.currentUser?.uid}")
+                    userId = auth.currentUser?.uid ?: "not found"
                     res = true
                 } else {
+                    res = false
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
                 }
             }
-        return res
+        return userId
     }
 
     override fun signInWithGoogle(): Boolean {
@@ -75,46 +122,46 @@ public class UserRepositoryImpl @Inject constructor(
         return res
     }
 
-    override fun getCurrentUser(): User? {
-        val user = FirebaseAuth.getInstance().currentUser
-        user?.let {
-            // Name, email address, and profile photo Url
-            val name = user.displayName
-            val email = user.email
-            val photoUrl = user.photoUrl
+    override fun signOut() {
+        auth.signOut()
+    }
 
-            // Check if user's email is verified
-            val emailVerified = user.isEmailVerified
+    override fun signInLocalBd(user: User): Completable {
+        user.isAuthorized = true
+        return userDAO.updateUser(UserMapper.toLocalUserFromUser(user))
+    }
 
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getToken() instead.
-            val uid = user.uid
-        }
-        return null
+    override fun signOutInLocalBd(user: User): Completable {
+        user.isAuthorized = false
+        return userDAO.updateUser(UserMapper.toLocalUserFromUser(user))
+    }
+
+    override fun getCurrentUser(): User {
+        val user = auth.currentUser!!
+        return UserMapper.toUserFromFirebaseUser(user, 0, 0, 0)
     }
 
     override fun getCurrentUserId(): String {
-        val user = FirebaseAuth.getInstance().currentUser
-        return user?.uid ?: "error"
+        return auth.currentUser?.uid ?: "error"
     }
 
-
-    override fun createAccount(email: String, password: String): Boolean {
-        var res = false
+    override fun createAccount(email: String, password: String): String {
+        var res = true
+        var userId = ""
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d(ContentValues.TAG, "createUserWithEmail:success")
-                    val user = auth.currentUser
+                    Log.d(ContentValues.TAG, "createUserWithEmail:success " + auth.currentUser?.uid)
+                    userId = auth.currentUser?.uid ?: "not found"
                     res = true
                 } else {
                     // If sign in fails, display a message to the user.
+                    res = false
                     Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
                 }
             }
-        return res
+        return userId
     }
 
     companion object {

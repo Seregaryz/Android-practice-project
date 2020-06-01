@@ -57,6 +57,9 @@ class DisputeViewModel @Inject constructor(
         return isSuccess
     }
 
+    fun getTagColor(tag: String): Int {
+        return disputeInteractor.getTagColor(tag)
+    }
 
     fun updateView() {
 

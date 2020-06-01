@@ -6,13 +6,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.kpfu.itis.core_db.dao.DisputeDAO
 import com.kpfu.itis.core_db.dao.UserDAO
+import com.kpfu.itis.core_db.dao.VoiceDAO
 import com.kpfu.itis.core_db.model.DisputeLocal
 import com.kpfu.itis.core_db.model.UserLocal
+import com.kpfu.itis.core_db.model.Voice
 
 @Database(
-    version = 6,
+    version = 9,
     entities = [
-        UserLocal::class, DisputeLocal::class
+        UserLocal::class, DisputeLocal::class, Voice::class
     ]
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -44,4 +46,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDAO
 
     abstract fun disputeDao(): DisputeDAO
+
+    abstract fun voiceDao(): VoiceDAO
 }

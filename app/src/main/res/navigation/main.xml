@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@id/signUpFragment">
+    app:startDestination="@id/signInFragment">
 
     <fragment
         android:id="@+id/disputes_list"
@@ -33,12 +33,12 @@
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.kfu.itis.androidpracticeproject.view.fragments.SignUpFragment"
-        android:label="fragment_sign_up"
+        android:label="Registration"
         tools:layout="@layout/fragment_sign_up" />
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.kfu.itis.androidpracticeproject.view.fragments.SignInFragment"
-        android:label="fragment_sign_in"
+        android:label="Login to your account"
         tools:layout="@layout/fragment_sign_in" />
     <fragment
         android:id="@+id/disputeFragment"

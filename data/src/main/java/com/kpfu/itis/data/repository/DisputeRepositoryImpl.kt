@@ -49,30 +49,30 @@ class DisputeRepositoryImpl @Inject constructor(
     }
 
     override fun createDisputeInLocalBd(
-        id: String, title: String, description1: String,
-        description2: String, disputeType: String
+        id: String, title: String, description: String, position1: String,
+        position2: String, disputeType: String, tag: String
     ): Completable {
         val currentUserId = userRepository.getCurrentUserId()
-        val descriptions = description1 + "_" + description2
+        val positions = position1 + "_" + position2
         val disputeLocal = DisputeLocal(
-            id, currentUserId, title, descriptions,
-            disputeType, CREATING_COUNT, CREATING_COUNT, CREATING_STATUS
+            id, currentUserId, title, description, positions,
+            disputeType, CREATING_COUNT, CREATING_COUNT, CREATING_STATUS, tag
         )
         return disputeDAO.insertDispute(disputeLocal)
     }
 
     override fun createDisputeInFirebase(
-        title: String, description1: String,
-        description2: String, disputeType: String
+        title: String, description: String, position1: String,
+        position2: String, disputeType: String, tag: String
     ): String {
         val currentUserId = userRepository.getCurrentUserId()
-        val descriptions = description1 + "_" + description2
+        val positions = position1 + "_" + position2
         val key = listRef.push().key ?: "null"
         myRef.child(key)
             .setValue(
                 DisputeLocal(
-                    key, currentUserId, title, descriptions,
-                    disputeType, CREATING_COUNT, CREATING_COUNT, CREATING_STATUS
+                    key, currentUserId, title, description, positions,
+                    disputeType, CREATING_COUNT, CREATING_COUNT, CREATING_STATUS, tag
                 )
             )
         return key

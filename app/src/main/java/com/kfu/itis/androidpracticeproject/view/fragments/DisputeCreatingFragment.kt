@@ -25,6 +25,7 @@ class DisputeCreatingFragment : Fragment(), AdapterView.OnItemSelectedListener {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: DisputeCreatingViewModel
     lateinit var disputeType: String
+    lateinit var specialTag: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,20 +46,30 @@ class DisputeCreatingFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun initViews() {
-        val spinner: Spinner = disputes_type_spinner
+        val typeSpinner: Spinner = disputes_type_spinner
         ArrayAdapter.createFromResource(
             Injector.appComponent.getContext(),
             R.array.disputes_type,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = adapter
+            typeSpinner.adapter = adapter
         }
-        spinner.onItemSelectedListener = this
+        val tagsSpinner: Spinner = disputes_special_tag_spinner
+        ArrayAdapter.createFromResource(
+            Injector.appComponent.getContext(),
+            R.array.disputes_special_tags,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            tagsSpinner.adapter = adapter
+        }
+        tagsSpinner.onItemSelectedListener = this
         btn_create_dispute.setOnClickListener {
             val title = et_dispute_title.text.toString()
-            val description1 = et_dispute_description1.text.toString()
-            val description2 = et_dispute_description2.text.toString()
+            val description = et_dispute_description.text.toString()
+            val position1 = et_dispute_description1.text.toString()
+            val position2 = et_dispute_description2.text.toString()
             viewModel.disputeLiveData.observe(viewLifecycleOwner, Observer {
                 if (it != null) {
                     this.view?.let { it1 ->
@@ -66,13 +77,21 @@ class DisputeCreatingFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     }
                 }
             })
-            viewModel.createDispute(title, description1, description2, disputeType)
+            viewModel.createDispute(
+                title,
+                description,
+                position1,
+                position2,
+                disputeType,
+                specialTag
+            )
         }
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
-        disputeType = parent.getItemAtPosition(pos).toString()
-        Snackbar.make(view, disputeType, Snackbar.LENGTH_SHORT).show()
+        disputeType = "Usual"
+        specialTag = parent.getItemAtPosition(pos).toString()
+        Snackbar.make(view, specialTag, Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onNothingSelected(parent: AdapterView<*>) {

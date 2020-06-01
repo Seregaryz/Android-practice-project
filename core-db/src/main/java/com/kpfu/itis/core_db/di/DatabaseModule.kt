@@ -4,6 +4,7 @@ import android.content.Context
 import com.kpfu.itis.core_db.AppDatabase
 import com.kpfu.itis.core_db.dao.DisputeDAO
 import com.kpfu.itis.core_db.dao.UserDAO
+import com.kpfu.itis.core_db.dao.VoiceDAO
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -27,5 +28,11 @@ class DatabaseModule {
     @Singleton
     fun provideDispiteDao(appDatabase: AppDatabase): DisputeDAO {
         return appDatabase.disputeDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideVoicesDao(appDatabase: AppDatabase): VoiceDAO {
+        return appDatabase.voiceDao()
     }
 }

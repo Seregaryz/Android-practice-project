@@ -16,17 +16,23 @@ interface DisputeInteractor {
     fun createDisputeInLocalBd(
         id: String,
         title: String,
-        description1: String,
-        description2: String,
-        disputeType: String
+        description: String,
+        position1: String,
+        position2: String,
+        disputeType: String,
+        tag: String
     ): Completable
 
     fun createDisputeInFirebaseDd(
         title: String,
-        description1: String,
-        description2: String,
-        disputeType: String
+        description: String,
+        position1: String,
+        position2: String,
+        disputeType: String,
+        tag: String
     ): String
+
+    fun getTagColor(tag: String): Int
 
     fun vote(dispute: Dispute, key: String): Completable
 }
