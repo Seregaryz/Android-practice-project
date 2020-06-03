@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/signInFragment">
+
+    <fragment
+        android:id="@+id/disputes_list"
+        android:name="com.kfu.itis.androidpracticeproject.view.fragments.DisputesListFragment"
+        android:label="Disputes"
+        tools:layout="@layout/fragment_disputes" />
+    <fragment
+        android:id="@+id/shop_fragment"
+        android:name="com.kfu.itis.androidpracticeproject.view.fragments.ShopFragment"
+        android:label="Shop"
+        tools:layout="@layout/fragment_shop" />
+    <fragment
+        android:id="@+id/dispute_creating_fragment"
+        android:name="com.kfu.itis.androidpracticeproject.view.fragments.DisputeCreatingFragment"
+        android:label="Create your dispute"
+        tools:layout="@layout/fragment_create_dispute" />
+    <fragment
+        android:id="@+id/liked_disputes_fragment"
+        android:name="com.kfu.itis.androidpracticeproject.view.fragments.LikedDisputesFragment"
+        android:label="Liked disputes"
+        tools:layout="@layout/fragment_liked_disputes" />
+    <fragment
+        android:id="@+id/profile_fragment"
+        android:name="com.kfu.itis.androidpracticeproject.view.fragments.ProfileFragment"
+        android:label="Your profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.kfu.itis.androidpracticeproject.view.fragments.SignUpFragment"
+        android:label="Registration"
+        tools:layout="@layout/fragment_sign_up" />
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.kfu.itis.androidpracticeproject.view.fragments.SignInFragment"
+        android:label="Login to your account"
+        tools:layout="@layout/fragment_sign_in" />
+    <fragment
+        android:id="@+id/disputeFragment"
+        android:name="com.kfu.itis.androidpracticeproject.view.fragments.DisputeFragment"
+        android:label="Back to list"
+        tools:layout="@layout/fragment_dispute" />
+
+</navigation>

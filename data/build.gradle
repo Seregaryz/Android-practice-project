@@ -1,0 +1,100 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
+
+ext {
+
+    API_KEY = '453c7e718711055469dce013917078d6'
+
+}
+
+if ("true" == System.getenv("CI")) {
+
+    def key = System.getenv("WARGAMING_KEY")
+
+    API_KEY = "\"$key\""
+
+} else {
+
+    API_KEY = apiKey
+
+}
+
+android {
+    compileSdkVersion 29
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildTypes.each {
+        it.buildConfigField 'String', 'API_ENDPOINT', baseUrl
+        it.buildConfigField 'String', 'API_KEY', apiKey
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':core-db')
+    implementation project(':domain')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
+
+    implementation retrofitDep
+    implementation rxCallAdapterDep
+    implementation gsonConvertedDep
+    implementation gsonDep
+
+    //RxJava
+    implementation rxJavaDep
+    implementation rxAndroidDep
+    implementation rxRoomDep
+    implementation 'com.github.frangsierra:rxfirebase:1.5.7'
+    //implementation "android.arch.persistence.room:rxjava2:1.1.1"
+
+    //firebase
+    implementation firebaseAuthDep
+    implementation firebaseCoreDep
+    implementation firebaseFirestoneDep
+    implementation googlePlayServicesDep
+    implementation 'com.google.firebase:firebase-database:19.3.0'
+    implementation 'com.google.firebase:firebase-analytics:17.4.0'
+
+    //dagger 2
+    def daggerVersion = "2.25.2"
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    implementation okhttpDep
+    implementation loggingInterceptorDep
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //storage
+    def room_version = "2.2.4"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    def lifecycleVersion = "2.2.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    //noinspection LifecycleAnnotationProcessorWithJava8
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion"
+
+}

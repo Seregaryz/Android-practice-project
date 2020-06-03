@@ -1,3 +1,64 @@
 <resources>
     <string name="app_name">Android practice project</string>
+
+    <string name="nav_list">List</string>
+    <string name="nav_market">Shop</string>
+    <string name="nav_add">Add</string>
+    <string name="nav_liked">Liked</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="default_web_client_id_local">1</string>
+    <string name="btn_create_dispute">Create</string>
+    <string name="rv_disputes_item_title">Title</string>
+    <string name="rv_disputes_item_description">Description</string>
+    <string name="dispute_tv_description">Description</string>
+    <string name="btn_vote">Vote</string>
+    <string name="btn_cancel_vote">Cancel vote</string>
+    <string name="tv_name_profile">Name</string>
+    <string name="tv_points_count_profile">"Points: "</string>
+    <string name="tv_voices_count_profile">"Voices: "</string>
+    <string name="tv_loses_count_profile">"Loses: "</string>
+    <string name="tv_wins_count_profile">"Wins: "</string>
+    <string name="btn_logout_profile">LogOut</string>
+    <string name="tv_or">OR</string>
+    <string name="btn_log_in">Log in</string>
+    <string name="et_email">Email</string>
+    <string name="et_password">Password</string>
+    <string name="btn_google_sign_in">Log in with google</string>
+    <string name="auth_btn_sign_up">Don\'t have an account? Sign up</string>
+    <string name="et_username">Username</string>
+    <string name="et_repeat_password">Repeat password</string>
+    <string name="btn_sign_up">Sign up</string>
+    <string name="tv_go_to_login">Do you already have an account? Log in</string>
+    <string name="tv_dispute_type">Dispute type</string>
+    <string name="et_dispute_title">Add title</string>
+    <string name="et_dispute_description">Add description</string>
+    <string name="et_add_first_position">Add first position</string>
+    <string name="et_add_second_position">Add second position</string>
+    <string name="tv_special_tag">Add special tag</string>
+    <string name="tv_dispute_description">Description</string>
+    <string name="tv_first_position_title">"First opponent's position: "</string>
+    <string name="tv_second_position_title">"Second opponent's position: "</string>
+    <string name="tv_tag">Special tag</string>
+    <string name="tv_errors">Some error</string>
+
+
+    <string-array name="disputes_type">
+        <item>Usual</item>
+        <item>Special</item>
+    </string-array>
+
+    <string-array name="disputes_special_tags">
+        <item>Cars</item>
+        <item>Politic</item>
+        <item>Art</item>
+        <item>Cinema</item>
+        <item>Love</item>
+        <item>Geographic</item>
+        <item>Sport</item>
+    </string-array>
+
+
 </resources>

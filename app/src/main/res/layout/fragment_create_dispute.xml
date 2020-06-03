@@ -1,0 +1,168 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.kfu.itis.androidpracticeproject.view.fragments.DisputeCreatingFragment">
+
+    <TextView
+        android:id="@+id/tv_errors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_errors"
+        android:textColor="@color/colorAccent"
+        android:layout_marginHorizontal="16dp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_dispute_type" />
+
+    <TextView
+        android:id="@+id/tv_dispute_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_dispute_type"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_marginHorizontal="16dp"
+        android:textColor="@color/secondary_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_errors"
+        app:layout_constraintBottom_toTopOf="@+id/disputes_type_spinner"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Spinner
+        android:id="@+id/disputes_type_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dispute_type"
+        app:layout_constraintBottom_toTopOf="@+id/til_dispute_title"
+        android:layout_marginVertical="8dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_dispute_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/til_dispute_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/disputes_type_spinner">
+
+        <EditText
+            android:id="@+id/et_dispute_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_text"
+            android:hint="@string/et_dispute_title"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_dispute_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/disputes_special_tag_spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_dispute_title"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <EditText
+            android:id="@+id/et_dispute_description"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:textColor="@color/primary_text"
+            android:hint="@string/et_dispute_description"
+            android:inputType="textMultiLine" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tv_dispute_tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_special_tag"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/secondary_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_dispute_description"
+        app:layout_constraintBottom_toTopOf="@+id/disputes_special_tag_spinner"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Spinner
+        android:id="@+id/disputes_special_tag_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dispute_tags"
+        app:layout_constraintBottom_toTopOf="@+id/til_dispute_description1"
+        android:layout_marginVertical="8dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_dispute_description1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/disputes_special_tag_spinner"
+        app:layout_constraintBottom_toTopOf="@+id/til_dispute_description2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <EditText
+            android:id="@+id/et_dispute_description1"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:textColor="@color/primary_text"
+            android:hint="@string/et_add_first_position"
+            android:inputType="textMultiLine" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_dispute_description2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_create_dispute"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_dispute_description1">
+
+        <EditText
+            android:id="@+id/et_dispute_description2"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:inputType="textMultiLine"
+            android:textColor="@color/primary_text"
+            android:hint="@string/et_add_second_position" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_create_dispute"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_create_dispute"
+        android:layout_marginVertical="16dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/icons"
+        app:layout_constraintTop_toBottomOf="@+id/til_dispute_description2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
