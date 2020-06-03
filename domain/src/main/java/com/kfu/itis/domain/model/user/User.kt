@@ -8,5 +8,4 @@ data class User(
     var winCount: Int,
     var pointsCount: Int,
     var isAuthorized: Boolean
-
 )

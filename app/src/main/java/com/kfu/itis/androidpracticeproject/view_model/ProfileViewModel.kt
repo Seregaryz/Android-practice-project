@@ -1,7 +1,5 @@
 package com.kfu.itis.androidpracticeproject.view_model
 
-import android.content.ContentValues
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.kfu.itis.domain.interactor.UserInteractor
@@ -24,7 +22,6 @@ class ProfileViewModel @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    Log.e(ContentValues.TAG, userMutableLiveData.value?.email)
                     userMutableLiveData.value = it
                 }, {
                     it.printStackTrace()
@@ -64,6 +61,5 @@ class ProfileViewModel @Inject constructor(
                     it.printStackTrace()
                 })
         )
-
     }
 }

@@ -88,8 +88,7 @@ class DisputeRepositoryImpl @Inject constructor(
         var isSuccess = true
         var errorMessage = ""
         var count = 0
-        //Не обновляются данные для локальной бд
-        var updatedDisputeLocal = DisputeMapper.toDisputeLocal(dispute)
+        val updatedDisputeLocal = DisputeMapper.toDisputeLocal(dispute)
         val query = myRef
         var countQuery = myRef
         query.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -163,19 +162,6 @@ class DisputeRepositoryImpl @Inject constructor(
         return RxFirebaseDatabase.observeSingleValueEvent(query, DisputeLocal::class.java)
             .toObservable()
             .map { item -> DisputeMapper.toDispute(item) }
-        //        query.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                val dispute = dataSnapshot.value as Observable<*>
-//                Log.d(TAG, "Value is: $dispute")
-//                return dispute
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                // Failed to read value
-//
-//                Log.w(TAG, "Failed to read value.", error.toException())
-//            }
-//        })
     }
 
     companion object {

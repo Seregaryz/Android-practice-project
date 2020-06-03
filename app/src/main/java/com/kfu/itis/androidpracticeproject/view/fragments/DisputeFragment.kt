@@ -85,7 +85,6 @@ class DisputeFragment : Fragment() {
                 } else {
                     btn_vote_desc1.text = BUTTON_VOTE
                     btn_vote_desc2.isClickable = true
-                    showSnackBar(viewModel.disputeLiveData.value?.firstPosVoicesCount.toString())
                     viewModel.getDispute(disputeId)
                 }
             }
@@ -98,7 +97,6 @@ class DisputeFragment : Fragment() {
                 } else {
                     btn_vote_desc2.text = BUTTON_CANCEL_VOTE
                     btn_vote_desc1.isClickable = false
-                    showSnackBar(viewModel.disputeLiveData.value?.secondPosVoicesCount.toString())
                     viewModel.getDispute(disputeId)
                 }
             } else {

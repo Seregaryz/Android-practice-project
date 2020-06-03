@@ -12,7 +12,7 @@ import com.kpfu.itis.core_db.model.UserLocal
 import com.kpfu.itis.core_db.model.Voice
 
 @Database(
-    version = 10,
+    version = 11,
     entities = [
         UserLocal::class, DisputeLocal::class, Voice::class
     ]
@@ -37,11 +37,6 @@ abstract class AppDatabase : RoomDatabase() {
             return instance!!
         }
     }
-
-//    private fun buildDatabase(context: Context) =
-//        Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
-//            .fallbackToDestructiveMigration()
-//            .build()
 
     abstract fun userDao(): UserDAO
 

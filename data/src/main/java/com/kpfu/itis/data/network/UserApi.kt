@@ -8,3 +8,4 @@ interface UserApi {
 
     fun getUsers(usersId: IntArray): List<UserLocal>
 }
+

@@ -1,7 +1,5 @@
 package com.kfu.itis.androidpracticeproject.view_model
 
-import android.content.ContentValues
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.kfu.itis.domain.interactor.DisputeInteractor
@@ -26,9 +24,6 @@ class DisputeViewModel @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    //disputeMutableLiveData.value = it
-                    Log.e(ContentValues.TAG, disputeId)
-                    Log.e(ContentValues.TAG, it.id)
                     key = it.id
                 }, {
                     it.printStackTrace()
@@ -39,7 +34,6 @@ class DisputeViewModel @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    Log.e(ContentValues.TAG, "success")
                     disputeMutableLiveData.value = it
                     isFinished = it.isFinished
                 }, {
@@ -65,10 +59,6 @@ class DisputeViewModel @Inject constructor(
 
     fun getTagColor(tag: String): Int {
         return disputeInteractor.getTagColor(tag)
-    }
-
-    fun updateView() {
-
     }
 
     companion object {

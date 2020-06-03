@@ -19,8 +19,8 @@ class DisputeItemHolder(
     fun bind(dispute: Dispute) {
         containerView.apply {
             tv_title.text = dispute.title
-            if (dispute.description.length > 30) {
-                val desc = dispute.description.substring(0, 30) + "..."
+            if (dispute.description.length > 40) {
+                val desc = dispute.description.substring(0, 40) + "..."
                 tv_description.text = desc
             } else tv_description.text = dispute.description
             tv_tag.text = dispute.tag
@@ -39,7 +39,7 @@ class DisputeItemHolder(
         }
     }
 
-    fun getTagColor(tag: String): Int {
+    private fun getTagColor(tag: String): Int {
         when (tag) {
             "Cars" -> return Color.parseColor("#C71585")
             "Geographic" -> return Color.parseColor("#00FF00")

@@ -18,7 +18,6 @@ class SignInViewModel @Inject constructor(
     val userLiveData: LiveData<User> = userMutableLiveData
     lateinit var currentUser: User
 
-
     fun signIn(email: String, password: String): Boolean {
         val userId = userInteractor.signIn(email, password)
         val isSuccess = userId != "not found"
