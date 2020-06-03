@@ -9,6 +9,8 @@ interface DisputeInteractor {
 
     fun getDisputes(): Observable<List<Dispute>>
 
+    fun saveDisputes(list: List<Dispute>): Completable
+
     fun getDisputeFromDb(id: String): Observable<Dispute>
 
     fun getDisputeFromFb(id: String): Observable<Dispute>

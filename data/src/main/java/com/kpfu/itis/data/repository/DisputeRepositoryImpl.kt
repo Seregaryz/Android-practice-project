@@ -1,5 +1,6 @@
 package com.kpfu.itis.data.repository
 
+import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.util.Log
 import com.google.firebase.database.*
@@ -46,6 +47,11 @@ class DisputeRepositoryImpl @Inject constructor(
                     .toList()
                     .toObservable()
             }
+    }
+
+    override fun saveDisputes(list: List<Dispute>): Completable {
+        val listOfLocalDisputes = DisputeMapper.toDisputeLocalList(list)
+        return disputeDAO.insertDisputes(listOfLocalDisputes)
     }
 
     override fun createDisputeInLocalBd(
@@ -153,6 +159,7 @@ class DisputeRepositoryImpl @Inject constructor(
 
     override fun getDisputeFromFb(id: String): Observable<Dispute> {
         val query = myRef.child(id)
+        Log.e(ContentValues.TAG, "$id is success")
         return RxFirebaseDatabase.observeSingleValueEvent(query, DisputeLocal::class.java)
             .toObservable()
             .map { item -> DisputeMapper.toDispute(item) }

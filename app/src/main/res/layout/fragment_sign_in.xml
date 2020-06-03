@@ -12,10 +12,23 @@
         android:layout_height="192dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_conversation"
-        app:layout_constraintBottom_toTopOf="@+id/et_email"
+        app:layout_constraintBottom_toTopOf="@+id/tv_errors"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_errors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_errors"
+        android:textColor="@color/colorAccent"
+        android:layout_marginHorizontal="16dp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/img_icon_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/et_email" />
 
     <EditText
         android:id="@+id/et_email"
@@ -29,7 +42,7 @@
         app:layout_constraintBottom_toTopOf="@+id/et_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_icon_login" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_errors" />
 
     <EditText
         android:id="@+id/et_password"

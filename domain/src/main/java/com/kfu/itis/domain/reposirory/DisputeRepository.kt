@@ -12,6 +12,8 @@ interface DisputeRepository {
 
     fun getDisputes(): Observable<List<Dispute>>
 
+    fun saveDisputes(list: List<Dispute>): Completable
+
     fun getDisputesFromFb(): Observable<List<Dispute>>
 
     fun createDisputeInLocalBd(

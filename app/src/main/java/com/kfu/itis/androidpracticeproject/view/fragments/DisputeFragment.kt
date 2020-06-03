@@ -49,7 +49,6 @@ class DisputeFragment : Fragment() {
             if (viewModel.disputeLiveData.value?.isFinished == true) {
                 //навигируемся на другой экран
             } else {
-                showSnackBar("Get/Update")
                 val positions = viewModel.disputeLiveData.value?.positions?.split("_")
                 viewModel.currentDispute = viewModel.disputeLiveData.value!!
                 tv_title.text = viewModel.disputeLiveData.value?.title
@@ -77,7 +76,6 @@ class DisputeFragment : Fragment() {
                 } else {
                     btn_vote_desc1.text = BUTTON_CANCEL_VOTE
                     btn_vote_desc2.isClickable = false
-                    showSnackBar("vote")
                     viewModel.getDispute(disputeId)
                 }
             } else {

@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import com.google.android.material.snackbar.Snackbar
 import com.kfu.itis.androidpracticeproject.Injector
 import com.kfu.itis.androidpracticeproject.R
 import com.kfu.itis.androidpracticeproject.view_model.SignUpViewModel
@@ -43,12 +43,24 @@ class SignUpFragment : BaseFragment() {
             val email = et_email.text.toString()
             val password = et_password.text.toString()
             val username = et_username.text.toString()
-            if (createAccount(email, password, username)) {
-                view?.let { it1 ->
-                    Snackbar.make(it1, "Success", Snackbar.LENGTH_SHORT).show()
+            val repeatedPassword = et_repeat_password.text.toString()
+            if (email.isNotEmpty() && password.isNotEmpty() && username.isNotEmpty() && repeatedPassword.isNotEmpty()) {
+                if (password == repeatedPassword) {
+                    if (createAccount(email, password, username)) {
+                        tv_errors.isVisible = false
+                        Navigation.findNavController(it).navigate(R.id.signInFragment)
+                    } else {
+                        tv_errors.text = CONNECTION_ERROR
+                        tv_errors.isVisible = true
+                    }
+                } else {
+                    tv_errors.text = PASSWORD_MISSMATCH_ERROR
+                    tv_errors.isVisible = true
                 }
-                Navigation.findNavController(it).navigate(R.id.signInFragment)
-            } else view?.let { it1 -> Snackbar.make(it1, "Error", Snackbar.LENGTH_SHORT).show() }
+            } else {
+                tv_errors.text = EMPTY_FIELDS_ERROR
+                tv_errors.isVisible = true
+            }
         }
         reg_btn_sign_in.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.signInFragment)
@@ -64,6 +76,9 @@ class SignUpFragment : BaseFragment() {
     }
 
     companion object {
+        const val PASSWORD_MISSMATCH_ERROR = "Password mismatch"
+        const val EMPTY_FIELDS_ERROR = "You should edit all fields"
+        const val CONNECTION_ERROR = "Error of connection"
         fun newInstance(): SignUpFragment = SignUpFragment()
     }
 

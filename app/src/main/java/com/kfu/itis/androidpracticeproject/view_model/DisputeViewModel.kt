@@ -1,5 +1,7 @@
 package com.kfu.itis.androidpracticeproject.view_model
 
+import android.content.ContentValues
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.kfu.itis.domain.interactor.DisputeInteractor
@@ -24,17 +26,21 @@ class DisputeViewModel @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    disputeMutableLiveData.value = it
+                    //disputeMutableLiveData.value = it
+                    Log.e(ContentValues.TAG, disputeId)
+                    Log.e(ContentValues.TAG, it.id)
                     key = it.id
                 }, {
                     it.printStackTrace()
                 })
         )
         disposables.add(
-            disputeInteractor.getDisputeFromFb(key)
+            disputeInteractor.getDisputeFromFb(disputeId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
+                    Log.e(ContentValues.TAG, "success")
+                    disputeMutableLiveData.value = it
                     isFinished = it.isFinished
                 }, {
                     it.printStackTrace()

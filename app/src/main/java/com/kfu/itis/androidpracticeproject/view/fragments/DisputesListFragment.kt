@@ -53,6 +53,7 @@ class DisputesListFragment : Fragment() {
                 rv_disputes.adapter = DisputeAdapter { disputeId -> navigateToDetails(disputeId) }
             }
             (rv_disputes.adapter as DisputeAdapter).submitList(it)
+            viewModel.updateLocalBd(it)
         })
         viewModel.getDisputes()
     }

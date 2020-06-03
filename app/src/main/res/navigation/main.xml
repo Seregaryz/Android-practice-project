@@ -8,27 +8,27 @@
     <fragment
         android:id="@+id/disputes_list"
         android:name="com.kfu.itis.androidpracticeproject.view.fragments.DisputesListFragment"
-        android:label="disputes"
+        android:label="Disputes"
         tools:layout="@layout/fragment_disputes" />
     <fragment
         android:id="@+id/shop_fragment"
         android:name="com.kfu.itis.androidpracticeproject.view.fragments.ShopFragment"
-        android:label="shop"
+        android:label="Shop"
         tools:layout="@layout/fragment_shop" />
     <fragment
         android:id="@+id/dispute_creating_fragment"
         android:name="com.kfu.itis.androidpracticeproject.view.fragments.DisputeCreatingFragment"
-        android:label="create_dispute"
+        android:label="Create your dispute"
         tools:layout="@layout/fragment_create_dispute" />
     <fragment
         android:id="@+id/liked_disputes_fragment"
         android:name="com.kfu.itis.androidpracticeproject.view.fragments.LikedDisputesFragment"
-        android:label="featured_disputes"
+        android:label="Liked disputes"
         tools:layout="@layout/fragment_liked_disputes" />
     <fragment
         android:id="@+id/profile_fragment"
         android:name="com.kfu.itis.androidpracticeproject.view.fragments.ProfileFragment"
-        android:label="profile"
+        android:label="Your profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/signUpFragment"
@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/disputeFragment"
         android:name="com.kfu.itis.androidpracticeproject.view.fragments.DisputeFragment"
-        android:label="fragment_dispute"
+        android:label="Back to list"
         tools:layout="@layout/fragment_dispute" />
 
 </navigation>

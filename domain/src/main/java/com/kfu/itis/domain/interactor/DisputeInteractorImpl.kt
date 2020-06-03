@@ -15,6 +15,10 @@ class DisputeInteractorImpl @Inject constructor(
         return disputeRepository.getDisputesFromFb()
     }
 
+    override fun saveDisputes(list: List<Dispute>): Completable {
+        return disputeRepository.saveDisputes(list)
+    }
+
     override fun getDisputeFromDb(id: String): Observable<Dispute> {
         return disputeRepository.getDisputeFromDb(id);
     }

@@ -28,4 +28,16 @@ class DisputeListViewModel @Inject constructor(
         )
     }
 
+    fun updateLocalBd(list: List<Dispute>) {
+        var isSuccess = true
+        disposables.add(
+            disputeInteractor.saveDisputes(list)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete { isSuccess = true }
+                .doOnError { isSuccess = false }
+                .subscribe()
+        )
+    }
+
 }

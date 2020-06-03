@@ -44,6 +44,14 @@ class DisputeMapper {
             }
             return result
         }
+
+        fun toDisputeLocalList(list: List<Dispute>): List<DisputeLocal> {
+            val result = ArrayList<DisputeLocal>()
+            for (d in list) {
+                result.add(toDisputeLocal(d))
+            }
+            return result
+        }
     }
 
 }

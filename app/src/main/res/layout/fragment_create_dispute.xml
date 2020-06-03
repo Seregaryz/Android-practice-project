@@ -6,6 +6,19 @@
     tools:context="com.kfu.itis.androidpracticeproject.view.fragments.DisputeCreatingFragment">
 
     <TextView
+        android:id="@+id/tv_errors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_errors"
+        android:textColor="@color/colorAccent"
+        android:layout_marginHorizontal="16dp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_dispute_type" />
+
+    <TextView
         android:id="@+id/tv_dispute_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,7 +28,7 @@
         android:textColor="@color/secondary_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_errors"
         app:layout_constraintBottom_toTopOf="@+id/disputes_type_spinner"
         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -113,7 +126,7 @@
         <EditText
             android:id="@+id/et_dispute_description1"
             android:layout_width="match_parent"
-            android:layout_height="128dp"
+            android:layout_height="120dp"
             android:textColor="@color/primary_text"
             android:hint="@string/et_add_first_position"
             android:inputType="textMultiLine" />
@@ -132,7 +145,7 @@
         <EditText
             android:id="@+id/et_dispute_description2"
             android:layout_width="match_parent"
-            android:layout_height="128dp"
+            android:layout_height="120dp"
             android:inputType="textMultiLine"
             android:textColor="@color/primary_text"
             android:hint="@string/et_add_second_position" />

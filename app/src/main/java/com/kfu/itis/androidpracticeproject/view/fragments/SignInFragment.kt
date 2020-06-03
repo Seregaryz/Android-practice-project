@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -36,7 +37,7 @@ class SignInFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (!viewModel.currentUserIsNull()) {
-            Navigation.findNavController(view).navigate(R.id.profile_fragment)
+            Navigation.findNavController(view).navigate(R.id.disputes_list)
         }
         subscribe(viewModel)
         initClickListeners()
@@ -60,8 +61,16 @@ class SignInFragment : BaseFragment() {
         btn_auth.setOnClickListener {
             val email = et_email.text.toString()
             val password = et_password.text.toString()
-            if (viewModel.signIn(email, password)) {
-                Navigation.findNavController(it).navigate(R.id.profile_fragment)
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                if (viewModel.signIn(email, password)) {
+                    Navigation.findNavController(it).navigate(R.id.profile_fragment)
+                } else {
+                    tv_errors.text = CONNECTION_ERROR
+                    tv_errors.isVisible = true
+                }
+            } else {
+                tv_errors.text = EMPTY_FIELDS_ERROR
+                tv_errors.isVisible = true
             }
         }
 //        btn_google_sign_in.setOnClickListener {
@@ -73,11 +82,9 @@ class SignInFragment : BaseFragment() {
         }
     }
 
-//    private fun checkCurrentUser() {
-//
-//    }
-
     companion object {
+        const val EMPTY_FIELDS_ERROR = "You should edit all fields"
+        const val CONNECTION_ERROR = "Error of connection"
         fun newInstance(): SignInFragment = SignInFragment()
     }
 }

@@ -42,6 +42,7 @@
     <string name="tv_first_position_title">"First opponent's position: "</string>
     <string name="tv_second_position_title">"Second opponent's position: "</string>
     <string name="tv_tag">Special tag</string>
+    <string name="tv_errors">Some error</string>
 
 
     <string-array name="disputes_type">

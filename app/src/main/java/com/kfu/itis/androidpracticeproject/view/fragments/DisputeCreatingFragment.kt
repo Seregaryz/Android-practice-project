@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import com.google.android.material.snackbar.Snackbar
 import com.kfu.itis.androidpracticeproject.Injector
 import com.kfu.itis.androidpracticeproject.R
 import com.kfu.itis.androidpracticeproject.view_model.DisputeCreatingViewModel
@@ -70,28 +70,35 @@ class DisputeCreatingFragment : Fragment(), AdapterView.OnItemSelectedListener {
             val description = et_dispute_description.text.toString()
             val position1 = et_dispute_description1.text.toString()
             val position2 = et_dispute_description2.text.toString()
-            viewModel.disputeLiveData.observe(viewLifecycleOwner, Observer {
-                if (it != null) {
-                    this.view?.let { it1 ->
-                        Navigation.findNavController(it1).navigate(R.id.disputes_list)
+            if (title.isNotEmpty() && description.isNotEmpty() && position1.isNotEmpty() && position2.isNotEmpty()) {
+                viewModel.disputeLiveData.observe(viewLifecycleOwner, Observer {
+                    if (it != null) {
+                        this.view?.let { it1 ->
+                            Navigation.findNavController(it1).navigate(R.id.disputes_list)
+                        }
+                    } else {
+                        tv_errors.text = CONNECTION_ERROR
+                        tv_errors.isVisible = true
                     }
-                }
-            })
-            viewModel.createDispute(
-                title,
-                description,
-                position1,
-                position2,
-                disputeType,
-                specialTag
-            )
+                })
+                viewModel.createDispute(
+                    title,
+                    description,
+                    position1,
+                    position2,
+                    disputeType,
+                    specialTag
+                )
+            } else {
+                tv_errors.text = EMPTY_FIELDS_ERROR
+                tv_errors.isVisible = true
+            }
         }
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
         disputeType = "Usual"
         specialTag = parent.getItemAtPosition(pos).toString()
-        Snackbar.make(view, specialTag, Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onNothingSelected(parent: AdapterView<*>) {
@@ -101,6 +108,11 @@ class DisputeCreatingFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private fun initViewModel() {
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(DisputeCreatingViewModel::class.java)
+    }
+
+    companion object {
+        const val EMPTY_FIELDS_ERROR = "You should edit all fields"
+        const val CONNECTION_ERROR = "Error of connection"
     }
 
 }
